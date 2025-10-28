@@ -6,17 +6,17 @@ import jakarta.validation.constraints.Size;
 
 public class TeacherRequest {
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 100, message = "Nome deve ter no máximo 100 caractéres")
+    @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name must have at most 100 characters")
     private String name;
 
-    @NotBlank(message = "Email é obrigatório")
-    @Email(message = "Email deve ser válido")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email must be valid")
     @Size(max = 120)
     private String email;
 
-    @NotBlank(message = "Departmento é obrigatório")
-    @Size(max = 60, message = "Departmento deve ter no máximo 60 caractéres")
+    @NotBlank(message = "Department is required")
+    @Size(max = 60, message = "Department must have at most 60 characters")
     private String department;
 
     public TeacherRequest() {

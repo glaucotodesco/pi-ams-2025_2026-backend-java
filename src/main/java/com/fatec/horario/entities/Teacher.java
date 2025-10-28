@@ -1,9 +1,6 @@
 package com.fatec.horario.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 
@@ -15,18 +12,12 @@ public class Teacher implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Size(max = 100, message = "Name deve ter no máximo 100 caractéres")
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotBlank(message = "Email é obrigatório")
-    @Email(message = "Email deve ser válido")
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    @NotBlank(message = "Departmento é obrigatório")
-    @Size(max = 60, message = "Departmento deve ter no máximo 60 caractéres")
     @Column(nullable = false, length = 60)
     private String department;
 
