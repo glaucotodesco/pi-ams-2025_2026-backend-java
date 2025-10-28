@@ -6,31 +6,31 @@ import jakarta.validation.constraints.Size;
 
 public class CurriculumRequest {
 
-    @NotBlank(message = "Nome é obrigatório")
+    @NotBlank(message = "Name is required")
     @Size(max = 100)
     private String name;
 
-    @NotBlank(message = "Abreviação é obrigatória")
+    @NotBlank(message = "Abbreviation is required")
     @Size(max = 20)
     private String abbreviation;
 
-    @NotNull(message = "ID do curso é obrigatório")
+    @NotNull(message = "Course ID is required")
     private Long courseId;
 
-    @NotBlank(message = "Área tecnológica é obrigatória")
+    @NotBlank(message = "Technology area is required")
     @Size(max = 60)
     private String technologyArea;
 
-    @NotNull(message = "Carga horária teórica é obrigatória")
+    @NotNull(message = "Theoretical workload is required")
     private Integer theoretical;
 
-    @NotNull(message = "Carga horária prática é obrigatória")
+    @NotNull(message = "Practical workload is required")
     private Integer practical;
 
-    @NotNull(message = "Quantidade de aulas é obrigatória")
+    @NotNull(message = "Number of classes is required")
     private Integer quantityClass;
 
-    @NotBlank(message = "Modalidade é obrigatória")
+    @NotBlank(message = "Modality is required")
     @Size(max = 40)
     private String modality;
 
@@ -113,4 +113,3 @@ public class CurriculumRequest {
         this.modality = modality;
     }
 }
-
