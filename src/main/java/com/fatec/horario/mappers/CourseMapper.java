@@ -9,9 +9,7 @@ public class CourseMapper {
     public static Course toEntity(CourseRequest request){
         Course course = new Course();
         course.setName(request.name());
-        course.setModality(request.modality());
-        course.setTechnologicalAxis(request.technologicalAxis());
-        course.setNumberOfComponentes(request.numberOfComponents());
+        course.setDescription(request.description());
         return course;
     }
     
@@ -19,10 +17,7 @@ public class CourseMapper {
        return new CourseResponse(
         course.getId(),
         course.getName(),
-        course.getModality(),
-        course.getTechnologicalAxis(),
-        course.getNumberOfComponents()
-
+        course.getDescription()
        );
     }
 
