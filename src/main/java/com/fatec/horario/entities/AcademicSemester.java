@@ -9,39 +9,36 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 
 @Entity
-@Table(name = "TBL_ACADEMIC_SEMESTER")
+@Table(name = "academic_semester")
 public class AcademicSemester implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAcademicSemester;
+    private Long id;
 
-    @NotNull(message = "Academic Year is required")
     @Column(nullable = false)
     private Integer academicYear;
 
-    @NotBlank(message = "Status is required")
     @Column(nullable = false, length = 20)
     private String status;
 
     public AcademicSemester() {}
 
-    public AcademicSemester(Long idAcademicSemester, Integer academicYear, String status) {
-        this.idAcademicSemester = idAcademicSemester;
+    public AcademicSemester(Long id, Integer academicYear, String status) {
+        this.id = id;
         this.academicYear = academicYear;
         this.status = status;
     }
 
-    public Long getIdAcademicSemester() {
-        return idAcademicSemester;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAcademicSemester(Long idAcademicSemester) {
-        this.idAcademicSemester = idAcademicSemester;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getAcademicYear() {
@@ -62,7 +59,7 @@ public class AcademicSemester implements Serializable {
 
     @Override
     public int hashCode() {
-        return (idAcademicSemester == null) ? 0 : idAcademicSemester.hashCode();
+        return (id == null) ? 0 : id.hashCode();
     }
 
     @Override
@@ -72,6 +69,6 @@ public class AcademicSemester implements Serializable {
         if (obj == null || getClass() != obj.getClass())
             return false;
         AcademicSemester other = (AcademicSemester) obj;
-        return idAcademicSemester != null && idAcademicSemester.equals(other.idAcademicSemester);
+        return id != null && id.equals(other.id);
     }
 }

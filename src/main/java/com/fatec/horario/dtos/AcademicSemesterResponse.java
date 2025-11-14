@@ -1,7 +1,7 @@
 package com.fatec.horario.dtos;
 
 public record AcademicSemesterResponse (
-    Long idAcademicSemester,
+    Long id,
     Integer academicYear,
     String status
 ){}
