@@ -5,23 +5,16 @@ import com.fatec.horario.dtos.ClassGroupResponse;
 import com.fatec.horario.entities.ClassGroup;
 
 public class ClassGroupMapper {
-    
-    public static ClassGroup toEntity(ClassGroupRequest request){
-        com.fatec.horario.entities.ClassGroup ClassGroup = new ClassGroup();
 
-    ClassGroup.setStudentQuantity(request.studentQuantity());
-
-        return ClassGroup;
-
+    public static ClassGroup toEntity(ClassGroupRequest request) {
+        ClassGroup classGroup = new ClassGroup();
+        classGroup.setStudentCount(request.studentCount());
+        return classGroup;
     }
 
-    public static ClassGroupResponse toResponse(com.fatec.horario.entities.ClassGroup ClassGroup) {
-       return new ClassGroupResponse(
-
-    ClassGroup.getId(),
-    ClassGroup.getStudentQuantity()
-
-       );
-
+    public static ClassGroupResponse toResponse(ClassGroup classGroup) {
+        return new ClassGroupResponse(
+                classGroup.getId(),
+                classGroup.getStudentCount());
     }
 }

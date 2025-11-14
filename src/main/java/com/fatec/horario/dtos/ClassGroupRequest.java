@@ -7,7 +7,7 @@ public record ClassGroupRequest(
 
  @NotBlank
  @Min(value = 1, message = "is required, This field must be filled in.")
- Integer studentQuantity
+ Integer studentCount
 
 ) {
 

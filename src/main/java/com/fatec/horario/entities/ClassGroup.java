@@ -14,11 +14,11 @@ public class ClassGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private Integer studentQuantity;
+    private Integer studentCount;
 
-    public ClassGroup(Long id, Integer studentQuantity) {
+    public ClassGroup(Long id, Integer studentCount) {
         this.id = id;
-        this.studentQuantity = studentQuantity;
+        this.studentCount = studentCount;
     }
 
     public ClassGroup() {
@@ -32,12 +32,12 @@ public class ClassGroup {
         this.id = id;
     }
 
-    public Integer getStudentQuantity() {
-        return studentQuantity;
+    public Integer getStudentCount() {
+        return studentCount;
     }
 
-    public void setStudentQuantity(Integer studentQuantity) {
-        this.studentQuantity = studentQuantity;
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
     }
 
     @Override
@@ -64,8 +64,4 @@ public class ClassGroup {
             return false;
         return true;
     }
-
-    
-    
-
 }
