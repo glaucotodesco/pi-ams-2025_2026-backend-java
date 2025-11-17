@@ -18,13 +18,13 @@ public class TechAxis implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String axisName;
+    private String name;
 
     public TechAxis() {}
 
-    public TechAxis(Long id, String axisName) {
+    public TechAxis(Long id, String name) {
         this.id = id;
-        this.axisName = axisName;
+        this.name = name;
     }
 
     public Long getId() {
@@ -35,12 +35,12 @@ public class TechAxis implements Serializable {
         this.id = id;
     }
 
-    public String getAxisName() {
-        return axisName;
+    public String getname() {
+        return name;
     }
 
-    public void setAxisName(String axisName) {
-        this.axisName = axisName;
+    public void setname(String name) {
+        this.name = name;
     }
 
     @Override

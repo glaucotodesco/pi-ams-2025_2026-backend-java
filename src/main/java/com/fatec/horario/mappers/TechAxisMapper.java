@@ -15,7 +15,7 @@ public class TechAxisMapper {
         }
 
         TechAxis techAxis = new TechAxis();
-        techAxis.setAxisName(request.axisName());
+        techAxis.setname(request.name());
         return techAxis;
     }
 
@@ -26,7 +26,7 @@ public class TechAxisMapper {
 
         return new TechAxisResponse(
             entity.getId(),
-            entity.getAxisName()
+            entity.getname()
         );
     }
 }
