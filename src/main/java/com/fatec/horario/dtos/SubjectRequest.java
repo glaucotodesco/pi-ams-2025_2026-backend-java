@@ -1,7 +1,7 @@
 package com.fatec.horario.dtos;
 
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 public record SubjectRequest(
@@ -10,8 +10,8 @@ public record SubjectRequest(
         String name,
         @Size(max = 20) 
         String acronym,
+        @Positive(message = "Pratical Lesson Count must be positive")
         Integer practicalLessonCount
-
 ) {
 
 }
