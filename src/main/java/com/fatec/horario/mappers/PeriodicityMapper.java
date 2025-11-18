@@ -24,7 +24,7 @@ public class PeriodicityMapper {
         }
 
         PeriodicityResponse response = new PeriodicityResponse();
-        response.setIdPeriodicity(entity.getIdPeriodicity());
+        response.setId(entity.getId());
         response.setDescription(entity.getDescription());
         return response;
     }

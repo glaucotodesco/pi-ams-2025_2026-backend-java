@@ -2,15 +2,15 @@ package com.fatec.horario.dtos;
 
 public class PeriodicityResponse {
 
-    private Long idPeriodicity;
+    private Long id;
     private String description;
 
-    public Long getIdPeriodicity() {
-        return idPeriodicity;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPeriodicity(Long idPeriodicity) {
-        this.idPeriodicity = idPeriodicity;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescription() {
