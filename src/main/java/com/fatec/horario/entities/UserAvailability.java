@@ -14,10 +14,10 @@ public class UserAvailability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private int weekday;
-    private int lessonNumber;
+    private Integer weekday;
+    private Integer lessonNumber;
 
-    public UserAvailability(Long id, int weekday, int lessonNumber) {
+    public UserAvailability(Long id, Integer weekday, Integer lessonNumber) {
         this.id = id;
         this.weekday = weekday;
         this.lessonNumber = lessonNumber;
@@ -30,26 +30,31 @@ public class UserAvailability {
 
     public Long getId() {
         return id;
+        
     }
 
     public void setId(Long id) {
         this.id = id;
+
     }
 
-    public int getWeekday() {
+    public Integer getWeekday() {
         return weekday;
     }
 
-    public void setWeekday(int weekday) {
+    public void setWeekday(Integer weekday) {
         this.weekday = weekday;
+
     }
 
-    public int getLessonNumber() {
+    public Integer getLessonNumber() {
         return lessonNumber;
+
     }
 
-    public void setLessonNumber(int lessonNumber) {
+    public void setLessonNumber(Integer lessonNumber) {
         this.lessonNumber = lessonNumber;
+
     }
 
     @Override
@@ -76,7 +81,8 @@ public class UserAvailability {
             return false;
         return true;
     }
-    
+
+
     
 
 }
