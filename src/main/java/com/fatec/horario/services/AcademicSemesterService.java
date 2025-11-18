@@ -13,7 +13,7 @@ import com.fatec.horario.repositories.AcademicSemesterRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 public class AcademicSemesterService {
-    
+
     @Autowired
     private AcademicSemesterRepository repository;
 
@@ -35,12 +35,14 @@ public class AcademicSemesterService {
         return AcademicSemesterMapper.toDTO(savedAcademicSemester);
     }
 
-        public void updateAcademicSemester(AcademicSemesterRequest request, long id) {
+        public AcademicSemesterResponse updateAcademicSemester(AcademicSemesterRequest request, long id) {
         AcademicSemester aux = repository.getReferenceById(id);
         aux.setAcademicYear(request.academicYear());
         aux.setStatus(request.status());
 
         repository.save(aux);
+
+        return AcademicSemesterMapper.toDTO(aux);
     }
 
         public void deleteAcademicSemesterById(long id) {
