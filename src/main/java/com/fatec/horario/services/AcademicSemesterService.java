@@ -3,6 +3,7 @@ package com.fatec.horario.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.fatec.horario.dtos.AcademicSemesterRequest;
 import com.fatec.horario.dtos.AcademicSemesterResponse;
@@ -12,40 +13,41 @@ import com.fatec.horario.repositories.AcademicSemesterRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
+@Service
 public class AcademicSemesterService {
 
     @Autowired
     private AcademicSemesterRepository repository;
 
-    public List< AcademicSemesterResponse> getAll() {
+    public List<AcademicSemesterResponse> getAll() {
         return repository.findAll()
                 .stream()
-                .map(AcademicSemesterMapper::toDTO)
+                .map(AcademicSemesterMapper::toResponse)
                 .toList();
     }
 
-        public AcademicSemesterResponse getById(long id) {
-        return repository.findById(id).map(AcademicSemesterMapper::toDTO)
+    public AcademicSemesterResponse getById(long id) {
+        return repository.findById(id).map(AcademicSemesterMapper::toResponse)
                 .orElseThrow(() -> new EntityNotFoundException("Academic Semester not found."));
     }
-    
-        public AcademicSemesterResponse saveAcademicSemester(AcademicSemesterRequest request) {
-        AcademicSemester AcademicSemester = AcademicSemesterMapper.toEntity(request);
-        AcademicSemester savedAcademicSemester = repository.save(AcademicSemester);
-        return AcademicSemesterMapper.toDTO(savedAcademicSemester);
+
+    public AcademicSemesterResponse create(AcademicSemesterRequest request) {
+        AcademicSemester academicSemester = AcademicSemesterMapper.toEntity(request);
+        AcademicSemester savedAcademicSemester = repository.save(academicSemester);
+        return AcademicSemesterMapper.toResponse(savedAcademicSemester);
     }
 
-        public AcademicSemesterResponse updateAcademicSemester(AcademicSemesterRequest request, long id) {
+    public AcademicSemesterResponse update(AcademicSemesterRequest request, long id) {
         AcademicSemester aux = repository.getReferenceById(id);
         aux.setAcademicYear(request.academicYear());
         aux.setStatus(request.status());
 
         repository.save(aux);
 
-        return AcademicSemesterMapper.toDTO(aux);
+        return AcademicSemesterMapper.toResponse(aux);
     }
 
-        public void deleteAcademicSemesterById(long id) {
+    public void deleteAcademicSemesterById(long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
         else
