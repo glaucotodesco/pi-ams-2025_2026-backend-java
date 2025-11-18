@@ -1,7 +1,11 @@
 package com.fatec.horario.entities;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "shift_schedule")
@@ -9,28 +13,24 @@ public class ShiftSchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_shift_schedule")
     private Long id;
 
-    @NotBlank
-    @Column(name = "shift_description", nullable = false, length = 255)
+    @Column(nullable = false, length = 255)
     private String shiftDescription;
 
-    @NotNull
-    @Min(0)
-    @Max(23)
-    @Column(name = "start_time", nullable = false)
+    @Column(nullable = false)
     private Integer startTime;
 
-    @NotNull
-    @Positive
-    @Column(name = "lesson_count", nullable = false)
+    @Column(nullable = false)
     private Integer lessonCount;
 
-    @NotNull
-    @Positive
-    @Column(name = "lesson_duration", nullable = false)
+    @Column(nullable = false)
     private Integer lessonDuration;
+
+    
+
+    public ShiftSchedule() {
+    }
 
     public Long getId() {
         return id;
@@ -71,4 +71,30 @@ public class ShiftSchedule {
     public void setLessonDuration(Integer lessonDuration) {
         this.lessonDuration = lessonDuration;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ShiftSchedule other = (ShiftSchedule) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+    
 }

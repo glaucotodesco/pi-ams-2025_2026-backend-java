@@ -14,10 +14,10 @@ public class ShiftScheduleMapper {
         }
 
         ShiftSchedule entity = new ShiftSchedule();
-        entity.setShiftDescription(request.getShiftDescription());
-        entity.setStartTime(request.getStartTime());
-        entity.setLessonCount(request.getLessonCount());
-        entity.setLessonDuration(request.getLessonDuration());
+        entity.setShiftDescription(request.shiftDescription());
+        entity.setStartTime(request.startTime());
+        entity.setLessonCount(request.lessonCount());
+        entity.setLessonDuration(request.lessonDuration());
 
         return entity;
     }
@@ -27,12 +27,12 @@ public class ShiftScheduleMapper {
             return null;
         }
 
-        ShiftScheduleResponse response = new ShiftScheduleResponse();
-        response.setId(entity.getId());
-        response.setShiftDescription(entity.getShiftDescription());
-        response.setStartTime(entity.getStartTime());
-        response.setLessonCount(entity.getLessonCount());
-        response.setLessonDuration(entity.getLessonDuration());
+        ShiftScheduleResponse response = new ShiftScheduleResponse(
+                entity.getId(),
+                entity.getShiftDescription(),
+                entity.getStartTime(),
+                entity.getLessonCount(),
+                entity.getLessonDuration());
 
         return response;
     }
