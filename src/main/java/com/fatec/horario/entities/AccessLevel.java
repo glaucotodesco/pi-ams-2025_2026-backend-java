@@ -15,12 +15,12 @@ public class AccessLevel {
 
     private Long id;
     private Integer level;
-    private String accessLevelDescription;
+    private String description;
 
-    public AccessLevel(Long id, Integer level, String accessLevelDescription) {
+    public AccessLevel(Long id, Integer level, String description) {
         this.id = id;
         this.level = level;
-        this.accessLevelDescription = accessLevelDescription;
+        this.description = description;
     }
 
     public AccessLevel() {
@@ -42,12 +42,12 @@ public class AccessLevel {
         this.level = level;
     }
 
-    public String getAccessLevelDescription() {
-        return accessLevelDescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAccessLevelDescription(String accessLevelDescription) {
-        this.accessLevelDescription = accessLevelDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
