@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PeriodicityMapper {
 
-    public Periodicity toEntity(PeriodicityRequest dto) {
-        if (dto == null) return null;
+    public Periodicity toEntity(PeriodicityRequest request) {
+        if (request == null) return null;
         Periodicity entity = new Periodicity();
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
+        entity.setName(request.getName());
+        entity.setDescription(request.getDescription());
         return entity;
     }
 
@@ -25,9 +25,9 @@ public class PeriodicityMapper {
         );
     }
 
-    public void updateEntityFromDto(PeriodicityRequest dto, Periodicity entity) {
-        if (dto == null || entity == null) return;
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
+    public void updateEntityFromDto(PeriodicityRequest request, Periodicity entity) {
+        if (request == null || entity == null) return;
+        entity.setName(request.getName());
+        entity.setDescription(request.getDescription());
     }
 }

@@ -34,16 +34,16 @@ public class PeriodicityService {
         return mapper.toResponse(entity);
     }
 
-    public PeriodicityResponse create(PeriodicityRequest dto) {
-        Periodicity entity = mapper.toEntity(dto);
+    public PeriodicityResponse create(PeriodicityRequest request) {
+        Periodicity entity = mapper.toEntity(request);
         Periodicity saved = repository.save(entity);
         return mapper.toResponse(saved);
     }
 
-    public PeriodicityResponse update(Long id, PeriodicityRequest dto) {
+    public PeriodicityResponse update(Long id, PeriodicityRequest request) {
         Periodicity entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Periodicity not found with id: " + id));
-        mapper.updateEntityFromDto(dto, entity);
+        mapper.updateEntityFromDto(request, entity);
         Periodicity saved = repository.save(entity);
         return mapper.toResponse(saved);
     }
