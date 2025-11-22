@@ -3,9 +3,7 @@ package com.fatec.horario.mappers;
 import com.fatec.horario.dtos.ScheduleRequest;
 import com.fatec.horario.dtos.ScheduleResponse;
 import com.fatec.horario.entities.Schedule;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ScheduleMapper {
 
     public static Schedule toEntity(ScheduleRequest request) {
