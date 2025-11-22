@@ -1,6 +1,5 @@
 package com.fatec.horario.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,17 +7,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "periodicity")
-public class Periodicity {
-
+@Table(name = "class_group")
+public class ClassGroup {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String description;
-    
-    public Periodicity() {
+    private Long id;
+    private Integer studentCount;
+
+    public ClassGroup(Long id, Integer studentCount) {
+        this.id = id;
+        this.studentCount = studentCount;
+    }
+
+    public ClassGroup() {
     }
 
     public Long getId() {
@@ -29,12 +32,12 @@ public class Periodicity {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getStudentCount() {
+        return studentCount;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class Periodicity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Periodicity other = (Periodicity) obj;
+        ClassGroup other = (ClassGroup) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -61,6 +64,4 @@ public class Periodicity {
             return false;
         return true;
     }
-
-    
 }

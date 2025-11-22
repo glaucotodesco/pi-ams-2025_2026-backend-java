@@ -1,6 +1,5 @@
 package com.fatec.horario.entities;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,17 +7,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "periodicity")
-public class Periodicity {
-
+@Table(name = "access_level")
+public class AccessLevel {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    @Column(nullable = false, length = 255)
+    private Long id;
+    private Integer level;
     private String description;
-    
-    public Periodicity() {
+
+    public AccessLevel(Long id, Integer level, String description) {
+        this.id = id;
+        this.level = level;
+        this.description = description;
+    }
+
+    public AccessLevel() {
     }
 
     public Long getId() {
@@ -27,6 +32,14 @@ public class Periodicity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getDescription() {
@@ -53,7 +66,7 @@ public class Periodicity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Periodicity other = (Periodicity) obj;
+        AccessLevel other = (AccessLevel) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -62,5 +75,4 @@ public class Periodicity {
         return true;
     }
 
-    
 }

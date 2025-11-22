@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PeriodicityRepository extends JpaRepository<Periodicity, Long> {
-    Periodicity findByName(String name);
+  
 }

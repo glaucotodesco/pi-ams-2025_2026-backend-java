@@ -2,10 +2,12 @@ package com.fatec.horario.services;
 
 import com.fatec.horario.repositories.PeriodicityRepository;
 import com.fatec.horario.mappers.PeriodicityMapper;
-import com.fatec.horario.dto.periodicity.PeriodicityRequest;
-import com.fatec.horario.dto.periodicity.PeriodicityResponse;
+import com.fatec.horario.dtos.PeriodicityRequest;
+import com.fatec.horario.dtos.PeriodicityResponse;
 import com.fatec.horario.entities.Periodicity;
 import jakarta.persistence.EntityNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,39 +15,34 @@ import java.util.List;
 @Service
 public class PeriodicityService {
 
-    private final PeriodicityRepository repository;
-    private final PeriodicityMapper mapper;
-
-    public PeriodicityService(PeriodicityRepository repository, PeriodicityMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
+    @Autowired
+    private PeriodicityRepository repository;
 
     public List<PeriodicityResponse> getAll() {
         return repository.findAll()
                 .stream()
-                .map(mapper::toResponse)
+                .map(PeriodicityMapper::toResponse)
                 .toList();
     }
 
     public PeriodicityResponse getById(Long id) {
         Periodicity entity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Periodicity not found with id: " + id));
-        return mapper.toResponse(entity);
+        return PeriodicityMapper.toResponse(entity);
     }
 
     public PeriodicityResponse create(PeriodicityRequest request) {
-        Periodicity entity = mapper.toEntity(request);
-        Periodicity saved = repository.save(entity);
-        return mapper.toResponse(saved);
+        Periodicity periodicity = PeriodicityMapper.toEntity(request);
+        periodicity = repository.save(periodicity);
+        return PeriodicityMapper.toResponse(periodicity);
     }
 
     public PeriodicityResponse update(Long id, PeriodicityRequest request) {
-        Periodicity entity = repository.findById(id)
+        Periodicity periodicity = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Periodicity not found with id: " + id));
-        mapper.updateEntityFromDto(request, entity);
-        Periodicity saved = repository.save(entity);
-        return mapper.toResponse(saved);
+        periodicity.setDescription(request.description());
+        periodicity = repository.save(periodicity);
+        return PeriodicityMapper.toResponse(periodicity);
     }
 
     public void delete(Long id) {
