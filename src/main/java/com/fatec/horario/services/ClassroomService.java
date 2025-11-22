@@ -29,32 +29,32 @@ public class ClassroomService {
     public ClassroomResponse getClassroomById(long id) {
         return repository.findById(id)
                 .map(ClassroomMapper::toResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Classroom not registered."));
+                .orElseThrow(() -> new EntityNotFoundException("Classroom not not found."));
     }
 
     public ClassroomResponse saveClassroom(ClassroomRequest request) {
-        Classroom Classroom = ClassroomMapper.toEntity(request);
-        Classroom savedClassroom = repository.save(Classroom);
-        return ClassroomMapper.toResponse(savedClassroom);
+        Classroom classroom = ClassroomMapper.toEntity(request);
+        classroom = repository.save(classroom);
+        return ClassroomMapper.toResponse(classroom);
     }
 
     public void updateClassroom(ClassroomRequest request, long id) {
-        Classroom Classroom = repository.findById(id)
+        Classroom classroom = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not found."));
 
-        Classroom.setName(request.name());
-        Classroom.setPhysicalResources(request.physicalResources());
-        Classroom.setSoftwareResources(request.softwareResources());
-        Classroom.setCapacity(request.capacity());
+        classroom.setName(request.name());
+        classroom.setPhysicalResources(request.physicalResources());
+        classroom.setSoftwareResources(request.softwareResources());
+        classroom.setCapacity(request.capacity());
 
-        repository.save(Classroom);
+        repository.save(classroom);
     }
 
-     public void deleteClassroomById(long id) {
+    public void deleteClassroomById(long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
         else
-            throw new EntityNotFoundException("The classroom doesn't exist.");
+            throw new EntityNotFoundException("The classroom not found.");
     }
 
 }

@@ -5,8 +5,8 @@ import com.fatec.horario.dtos.ClassroomResponse;
 import com.fatec.horario.entities.Classroom;
 
 public class ClassroomMapper {
-    
-    public static Classroom toEntity(ClassroomRequest request){
+
+    public static Classroom toEntity(ClassroomRequest request) {
         Classroom Classroom = new Classroom();
 
         Classroom.setName(request.name());
@@ -17,16 +17,15 @@ public class ClassroomMapper {
         return Classroom;
     }
 
-    public static ClassroomResponse toResponse(Classroom Classroom) {
-       return new ClassroomResponse(
+    public static ClassroomResponse toResponse(Classroom classroom) {
+        return new ClassroomResponse(
+                classroom.getId(),
+                classroom.getName(),
+                classroom.getPhysicalResources(),
+                classroom.getSoftwareResources(),
+                classroom.getCapacity()
 
-       Classroom.getId(),
-       Classroom.getName(),
-       Classroom.getPhysicalResources(),
-       Classroom.getSoftwareResources(),
-       Classroom.getCapacity()
-
-       );
+        );
 
     }
 
