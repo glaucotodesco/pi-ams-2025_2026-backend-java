@@ -1,7 +1,6 @@
 package com.fatec.horario.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,38 +19,33 @@ public class ScheduleService {
     @Autowired
     private ScheduleRepository repository;
 
-    @Autowired
-    private ScheduleMapper mapper;
-
     public List<ScheduleResponse> getAll() {
         return repository.findAll()
                 .stream()
-                .map(mapper::toDTO)
-                .collect(Collectors.toList());
+                .map(ScheduleMapper::toResponse)
+                .toList();
     }
 
     public ScheduleResponse getById(Long id) {
         Schedule schedule = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule not found with id: " + id));
-
-        return mapper.toDTO(schedule);
+        return ScheduleMapper.toResponse(schedule);
     }
 
-    public ScheduleResponse create(ScheduleRequest dto) {
-        Schedule schedule = mapper.toEntity(dto);
-        Schedule saved = repository.save(schedule);
-        return mapper.toDTO(saved);
+    public ScheduleResponse create(ScheduleRequest request) {
+        Schedule schedule = ScheduleMapper.toEntity(request);
+        schedule = repository.save(schedule);
+        return ScheduleMapper.toResponse(schedule);
     }
 
-    public ScheduleResponse update(Long id, ScheduleRequest dto) {
+    public ScheduleResponse update(Long id, ScheduleRequest request) {
         Schedule schedule = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Schedule not found with id: " + id));
 
-        schedule.setLessonNuumber(dto.lessonNumber());
-        schedule.setWeekday(dto.weekday());
-
-        Schedule updated = repository.save(schedule);
-        return mapper.toDTO(updated);
+        schedule.setLessonNumber(request.lessonNumber());
+        schedule.setWeekday(request.weekday());
+        schedule = repository.save(schedule);
+        return ScheduleMapper.toResponse(schedule);
     }
 
     public void delete(Long id) {

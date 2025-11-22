@@ -8,20 +8,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleMapper {
 
-    public Schedule toEntity(ScheduleRequest request) {
-        if (request == null) {
-            return null;
-        }
+    public static Schedule toEntity(ScheduleRequest request) {
         Schedule schedule = new Schedule();
-        schedule.setLessonNuumber(request.lessonNumber());
+        schedule.setLessonNumber(request.lessonNumber());
         schedule.setWeekday(request.weekday());
         return schedule;
     }
 
-    public ScheduleResponse toDTO(Schedule schedule) {
-        if (schedule == null) {
-            return null;
-        }
+    public static ScheduleResponse toResponse(Schedule schedule) {
         return new ScheduleResponse(
             schedule.getId(),
             schedule.getLessonNumber(),
