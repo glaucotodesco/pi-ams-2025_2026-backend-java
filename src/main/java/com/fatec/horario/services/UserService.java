@@ -1,5 +1,10 @@
 package com.fatec.horario.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.fatec.horario.dtos.UserRequest;
 import com.fatec.horario.dtos.UserResponse;
 import com.fatec.horario.entities.User;
@@ -7,47 +12,40 @@ import com.fatec.horario.mappers.UserMapper;
 import com.fatec.horario.repositories.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
-
-    public UserService(UserRepository userRepository, UserMapper userMapper) {
-        this.userRepository = userRepository;
-        this.userMapper = userMapper;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     public List<UserResponse> getAll() {
         return userRepository.findAll()
                 .stream()
-                .map(userMapper::toResponse)
-                .collect(Collectors.toList());
+                .map(UserMapper::toResponse)
+                .toList();
     }
 
     public UserResponse getById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
-        return userMapper.toResponse(user);
+        return UserMapper.toResponse(user);
     }
 
-    public UserResponse create(UserRequest dtos) {
-        User user = userMapper.toEntity(dtos);
-        User savedUser = userRepository.save(user);
-        return userMapper.toResponse(savedUser);
+    public UserResponse create(UserRequest request) {
+        User user = UserMapper.toEntity(request);
+        user = userRepository.save(user);
+        return UserMapper.toResponse(user);
     }
 
-    public UserResponse update(Long id, UserRequest dtos) {
-        User existingUser = userRepository.findById(id)
+    public UserResponse update(Long id, UserRequest request) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + id));
-        User updatedUser = userRepository.save(existingUser);
-
-        return userMapper.toResponse(updatedUser);
+        user.setName(request.name());
+        user.setEmail(request.email());
+        user.setPassword(request.password());
+        user = userRepository.save(user);
+        return UserMapper.toResponse(user);
     }
 
     public void delete(Long id) {
