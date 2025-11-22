@@ -6,8 +6,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 public record LessonRequest(
     
-    @NotNull(message = "studentCount is required")
-    @PositiveOrZero(message = "studentCount must be zero or positive")
+    @NotNull(message = "StudentCount is required")
+    @PositiveOrZero(message = "StudentCount must be zero or positive")
     Integer studentCount
 
 ) {}

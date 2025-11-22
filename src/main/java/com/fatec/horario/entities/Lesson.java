@@ -1,7 +1,5 @@
 package com.fatec.horario.entities;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -9,9 +7,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TBL_LESSON")
-public class Lesson implements Serializable {
-    private static final long serialVersionUID = 1L;
+@Table(name = "lesson")
+public class Lesson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
