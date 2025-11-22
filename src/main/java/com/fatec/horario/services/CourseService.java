@@ -1,8 +1,6 @@
 package com.fatec.horario.services;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +21,7 @@ public class CourseService {
         return repository.findAll()
                 .stream()
                 .map(CourseMapper::toResponse)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public CourseResponse getById(Long id) {
@@ -33,21 +31,19 @@ public class CourseService {
         return CourseMapper.toResponse(course);
     }
 
-    public CourseResponse create(CourseRequest dto) {
-        Course course = CourseMapper.toEntity(dto);
-        Course saved = repository.save(course);
-        return CourseMapper.toResponse(saved);
+    public CourseResponse create(CourseRequest request) {
+        Course course = CourseMapper.toEntity(request);
+        course = repository.save(course);
+        return CourseMapper.toResponse(course);
     }
 
-    public CourseResponse update(Long id, CourseRequest dto) {
+    public CourseResponse update(Long id, CourseRequest request) {
         Course course = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Course not found with id: " + id));
-
-        course.setName(dto.name());
-        course.setDescription(dto.description());
-
-        Course updated = repository.save(course);
-        return CourseMapper.toResponse(updated);
+        course.setName(request.name());
+        course.setDescription(request.description());
+        course = repository.save(course);
+        return CourseMapper.toResponse(course);
     }
 
     public void delete(Long id) {
