@@ -11,12 +11,15 @@ public record ClassroomRequest(
   @Size(min = 2, max = 255, message = "the name must be between 2 and 255 characters long.")
   String name,
 
+  @Size(min = 2, max = 255, message = "Location must be between 2 and 255 characters long.")
+  String location,
+
   @NotBlank(message = "PhysicalResources is required.")
   @Size(min = 2, max = 255, message = "PhysicalResources must be between 2 and 255 characters long.")
   String physicalResources,
 
   @NotBlank(message = "SoftwareResources is required.")
-  @Size(min = 2, max = 255, message = "PhysicalResources must be between 2 and 255 characters long.")
+  @Size(min = 2, max = 255, message = "SoftwareResources must be between 2 and 255 characters long.")
   String softwareResources,
 
   @NotNull(message = "Capacity is required.")

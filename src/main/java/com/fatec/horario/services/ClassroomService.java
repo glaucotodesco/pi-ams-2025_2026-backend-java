@@ -43,6 +43,7 @@ public class ClassroomService {
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not found."));
 
         classroom.setName(request.name());
+        classroom.setLocation(request.location());
         classroom.setPhysicalResources(request.physicalResources());
         classroom.setSoftwareResources(request.softwareResources());
         classroom.setCapacity(request.capacity());
