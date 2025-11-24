@@ -19,26 +19,26 @@ public class ClassroomService {
     @Autowired
     private ClassroomRepository repository;
 
-    public List<ClassroomResponse> getClassrooms() {
+    public List<ClassroomResponse> getAll() {
         return repository.findAll()
                 .stream()
                 .map(ClassroomMapper::toResponse)
                 .toList();
     }
 
-    public ClassroomResponse getClassroomById(long id) {
+    public ClassroomResponse getById(long id) {
         return repository.findById(id)
                 .map(ClassroomMapper::toResponse)
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not not found."));
     }
 
-    public ClassroomResponse saveClassroom(ClassroomRequest request) {
+    public ClassroomResponse save(ClassroomRequest request) {
         Classroom classroom = ClassroomMapper.toEntity(request);
         classroom = repository.save(classroom);
         return ClassroomMapper.toResponse(classroom);
     }
 
-    public void updateClassroom(ClassroomRequest request, long id) {
+    public void update(ClassroomRequest request, long id) {
         Classroom classroom = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not found."));
 
@@ -51,7 +51,7 @@ public class ClassroomService {
         repository.save(classroom);
     }
 
-    public void deleteClassroomById(long id) {
+    public void delete(long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
         else
