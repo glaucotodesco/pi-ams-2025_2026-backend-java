@@ -18,15 +18,19 @@ public class Classroom {
     private String physicalResources;
     private String softwareResources;
     private Integer capacity;
+    private Boolean template;
+    private Boolean practical;
 
     public Classroom(Long id, String name, String location, String physicalResources, String softwareResources,
-            Integer capacity) {
+            Integer capacity, Boolean template, Boolean practical) {
         this.id = id;
         this.name = name;
         this.physicalResources = physicalResources;
         this.softwareResources = softwareResources;
         this.capacity = capacity;
         this.location = location;
+        this.template = template;
+        this.practical = practical;
     }
 
     public Classroom() {
@@ -80,7 +84,23 @@ public class Classroom {
         this.capacity = capacity;
     }
 
-       @Override
+    public Boolean getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Boolean template) {
+        this.template = template;
+    }
+
+    public Boolean getPractical() {
+        return practical;
+    }
+
+    public void setPractical(Boolean practical) {
+        this.practical = practical;
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;

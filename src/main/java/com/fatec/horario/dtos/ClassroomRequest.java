@@ -24,7 +24,13 @@ public record ClassroomRequest(
 
   @NotNull(message = "Capacity is required.")
   @Positive (message = "Capacity must be positive.")
-  Integer capacity
+  Integer capacity,
+
+  @NotNull(message = "Template is required.")
+  Boolean template,
+
+  @NotNull(message = "Practical is required.")
+  Boolean practical
 
 ) {
     

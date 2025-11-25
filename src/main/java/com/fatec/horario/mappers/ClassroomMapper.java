@@ -25,7 +25,9 @@ public class ClassroomMapper {
             classroom.getLocation(),
             classroom.getPhysicalResources(),
             classroom.getSoftwareResources(),
-            classroom.getCapacity()
+            classroom.getCapacity(),
+            classroom.getTemplate(),
+            classroom.getPractical()
 
         );
 

@@ -58,4 +58,22 @@ public class ClassroomService {
             throw new EntityNotFoundException("The classroom not found.");
     }
 
+    public List<ClassroomResponse> getAllTemplates() {
+        return repository.findByIsTemplate(true)
+                .stream()
+                .map(ClassroomMapper::toResponse)
+                .toList();
+    }
+
+    public List<ClassroomResponse> getAllClassrooms() {
+        return repository.findByIsTemplate(false)
+                .stream()
+                .map(ClassroomMapper::toResponse)
+                .toList();
+    }
+
+
+    
+
+  
 }

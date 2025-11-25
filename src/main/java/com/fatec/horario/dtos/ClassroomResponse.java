@@ -1,5 +1,6 @@
 package com.fatec.horario.dtos;
 
+
 public record ClassroomResponse(
 
   Long id,
@@ -7,7 +8,9 @@ public record ClassroomResponse(
   String location,
   String physicalResources,
   String softwareResources,
-  Integer capacity
+  Integer capacity,
+  Boolean template,
+  Boolean practical
 
 ) {
 
