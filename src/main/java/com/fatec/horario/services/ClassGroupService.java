@@ -19,20 +19,20 @@ public class ClassGroupService {
     @Autowired
     private ClassGroupRepository repository;
    
-    public List<ClassGroupResponse> getClassGroups() {
+    public List<ClassGroupResponse> getAll() {
         return repository.findAll()
                 .stream()
                 .map(ClassGroupMapper::toResponse)
                 .toList();
     }
 
-    public ClassGroupResponse getClassGroupById(long id) {
+    public ClassGroupResponse getById(long id) {
         return repository.findById(id)
                 .map(ClassGroupMapper::toResponse)
                 .orElseThrow(() -> new EntityNotFoundException("Class group not registered"));
     }
 
-    public void deleteClassGroupById(long id) {
+    public void delete(long id) {
         if (repository.existsById(id))
             repository.deleteById(id);
         else
@@ -47,7 +47,7 @@ public class ClassGroupService {
         return ClassGroupMapper.toResponse(savedClassGroup);
     }
 
-    public void updateClassGroup(ClassGroupRequest request, long id) {
+    public void update(ClassGroupRequest request, long id) {
         ClassGroup ClassGroup = repository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("Class group not found"));
     
@@ -55,11 +55,6 @@ public class ClassGroupService {
         repository.save(ClassGroup);
     }
 
-    public List<ClassGroupResponse> getClassGroupsByCategory(long ClassGroupId) {
-        return repository.findByClassGroupId(ClassGroupId)
-                .stream()
-                .map(ClassGroupMapper::toResponse)
-                .toList();
-    }
+   
 
 }
