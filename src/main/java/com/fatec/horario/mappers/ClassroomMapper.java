@@ -14,6 +14,8 @@ public class ClassroomMapper {
         classroom.setPhysicalResources(request.physicalResources());
         classroom.setSoftwareResources(request.softwareResources());
         classroom.setCapacity(request.capacity());
+        classroom.setTemplate(request.template());
+        classroom.setPractical(request.practical());
 
         return classroom;
     }
@@ -28,7 +30,6 @@ public class ClassroomMapper {
             classroom.getCapacity(),
             classroom.getTemplate(),
             classroom.getPractical()
-
         );
 
     }
