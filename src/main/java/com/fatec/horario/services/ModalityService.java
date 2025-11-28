@@ -40,20 +40,21 @@ public class ModalityService {
 
     }
 
-    public ModalityResponse save(ModalityRequest request) {
-        Modality Modality = ModalityMapper.toEntity(request);
+    public ModalityResponse create(ModalityRequest request) {
+        Modality modality = ModalityMapper.toEntity(request);
         
-        Modality savedModality = repository.save(Modality);
+        Modality savedModality = repository.save(modality);
         return ModalityMapper.toResponse(savedModality);
     }
 
-    public void update(ModalityRequest request, long id) {
-        Modality Modality = repository.findById(id)
+    public ModalityResponse update(ModalityRequest request, long id) {
+        Modality modality = repository.findById(id)
             .orElseThrow(() -> new EntityNotFoundException("Modality not found"));
         
-        Modality.setName(request.name());
-        
-        repository.save(Modality);
+        modality.setName(request.name());
+    
+        modality = repository.save(modality);
+        return  ModalityMapper.toResponse(modality);
     }
 
     
