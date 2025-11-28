@@ -59,14 +59,14 @@ public class ClassroomService {
     }
 
     public List<ClassroomResponse> getAllTemplates() {
-        return repository.findByIsTemplate(true)
+        return repository.findByTemplate(true)
                 .stream()
                 .map(ClassroomMapper::toResponse)
                 .toList();
     }
 
     public List<ClassroomResponse> getAllClassrooms() {
-        return repository.findByIsTemplate(false)
+        return repository.findByTemplate(false)
                 .stream()
                 .map(ClassroomMapper::toResponse)
                 .toList();
