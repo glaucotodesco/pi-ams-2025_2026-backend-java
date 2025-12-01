@@ -44,7 +44,7 @@ public class SubjectService {
         subject.setName(request.name());
         subject.setAcronym(request.acronym());
         subject.setPracticalLessonCount(request.practicalLessonCount());
-
+        subject.setSemesterNumber(request.semesterNumber());
         subject = subjectRepository.save(subject);
         return SubjectMapper.toResponse(subject);
     }
