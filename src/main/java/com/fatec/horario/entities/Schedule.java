@@ -42,7 +42,7 @@ public class Schedule implements Serializable{
         return lessonNumber;
     }
 
-    public void setLessonNuumber(Integer lessonNumber) {
+    public void setLessonNumber(Integer lessonNumber) {
         this.lessonNumber = lessonNumber;
     }
 

@@ -8,10 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SubjectMapper {
 
-    public Subject toEntity(SubjectRequest request) {
-        if (request == null) {
-            return null;
-        }
+    public static Subject toEntity(SubjectRequest request) {
+
         Subject subject = new Subject();
         subject.setName(request.name());
         subject.setAcronym(request.acronym());
@@ -20,10 +18,7 @@ public class SubjectMapper {
         return subject;
     }
 
-    public SubjectResponse toResponse(Subject subject) {
-        if (subject == null) {
-            return null;
-        }
+    public static SubjectResponse toResponse(Subject subject) {
         return new SubjectResponse(
             subject.getId(),
             subject.getName(),

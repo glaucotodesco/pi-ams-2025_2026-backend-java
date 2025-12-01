@@ -13,7 +13,7 @@ public class AcademicSemesterMapper {
     return academicSemester;
     }
 
-    public static AcademicSemesterResponse toDTO(AcademicSemester academicSemester) {
+    public static AcademicSemesterResponse toResponse(AcademicSemester academicSemester) {
         return new AcademicSemesterResponse(
             academicSemester.getId(),
             academicSemester.getAcademicYear(),

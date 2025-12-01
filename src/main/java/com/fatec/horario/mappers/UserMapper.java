@@ -3,12 +3,10 @@ package com.fatec.horario.mappers;
 import com.fatec.horario.entities.User;
 import com.fatec.horario.dtos.UserRequest;
 import com.fatec.horario.dtos.UserResponse;
-import org.springframework.stereotype.Component;
 
-@Component
 public class UserMapper {
 
-    public User toEntity(UserRequest request) {
+    public static User toEntity(UserRequest request) {
         if (request == null) {
             return null;
         }
@@ -19,7 +17,7 @@ public class UserMapper {
         return user;
     }
 
-    public UserResponse toResponse(User user) {
+    public static UserResponse toResponse(User user) {
         if (user == null) {
             return null;
         }

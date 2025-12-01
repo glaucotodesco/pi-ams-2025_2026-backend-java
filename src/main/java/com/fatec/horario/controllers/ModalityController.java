@@ -16,54 +16,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fatec.horario.dtos.TechAxisRequest;
-import com.fatec.horario.dtos.TechAxisResponse;
-import com.fatec.horario.services.TechAxisService;
+import com.fatec.horario.dtos.ModalityRequest;
+import com.fatec.horario.dtos.ModalityResponse;
+import com.fatec.horario.services.ModalityService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/tech-axis")
+@RequestMapping("/modalities")
 @CrossOrigin
-public class TechAxisController {
+public class ModalityController {
 
-    @Autowired
-    private TechAxisService service;
+        @Autowired
+    private ModalityService service;
 
     @GetMapping
-    public ResponseEntity<List<TechAxisResponse>> getAll() {
-        List<TechAxisResponse> list = service.getAll();
-        return ResponseEntity.ok(list);
+    public ResponseEntity<List<ModalityResponse>> getAll() {
+        List<ModalityResponse> modalities = service.getAll();
+        return ResponseEntity.ok(modalities);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TechAxisResponse> getById(@PathVariable Long id) {
-        TechAxisResponse response = service.getById(id);
-        return ResponseEntity.ok(response);
+     @GetMapping("/{id}")
+    public ResponseEntity<ModalityResponse> getById(@PathVariable Long id) {
+        ModalityResponse modality = service.getById(id);
+        return ResponseEntity.ok(modality);
     }
 
     @PostMapping
-    public ResponseEntity<TechAxisResponse> create(
-            @Valid @RequestBody TechAxisRequest request) {
+    public ResponseEntity<ModalityResponse> create(
+            @Valid @RequestBody ModalityRequest request) {
 
-        TechAxisResponse response = service.create(request);
+        ModalityResponse modality = service.create(request);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(response.id())
-                .toUri();
+            .fromCurrentRequest()
+            .path("/{id}")
+            .buildAndExpand(modality.id())
+            .toUri();
 
-        return ResponseEntity.created(location).body(response);
+        return ResponseEntity.created(location).body(modality);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TechAxisResponse> update(
+    public ResponseEntity<ModalityResponse> update(
             @PathVariable Long id,
-            @Valid @RequestBody TechAxisRequest request) {
+            @Valid @RequestBody ModalityRequest request) {
 
-        TechAxisResponse response = service.update(id, request);
-        return ResponseEntity.ok(response);
+        ModalityResponse modality = service.update(request, id);
+        return ResponseEntity.ok(modality);
     }
 
     @DeleteMapping("/{id}")
@@ -71,5 +71,6 @@ public class TechAxisController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 }
 
