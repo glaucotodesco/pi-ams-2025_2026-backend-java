@@ -1,0 +1,67 @@
+package com.fatec.horario.controllers;
+import com.fatec.horario.dtos.ClassGroupRequest;
+import com.fatec.horario.dtos.ClassGroupResponse;
+import com.fatec.horario.services.ClassGroupService;
+
+
+import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.List;
+
+@RestController
+@RequestMapping("/class-groups")
+@CrossOrigin
+public class ClassGroupController {
+
+    @Autowired
+    private ClassGroupService service;
+
+    @GetMapping
+    public ResponseEntity<List<ClassGroupResponse>> getAll() {
+        List<ClassGroupResponse> classGroups = service.getAll();
+        return ResponseEntity.ok(classGroups);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClassGroupResponse> getById(@PathVariable Long id) {
+        ClassGroupResponse classGroup = service.getById(id);
+        return ResponseEntity.ok(classGroup);
+    }
+
+    @PostMapping
+    public ResponseEntity<ClassGroupResponse> saveClassGroup(
+            @Valid @RequestBody ClassGroupRequest request) {
+
+        ClassGroupResponse classGroup = service.saveClassGroup(request);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(classGroup.id())
+                .toUri();
+
+        return ResponseEntity.created(location).body(classGroup);
+    }
+
+    @PutMapping("/{id}")
+public ResponseEntity<Void> updateClassGroup(
+        @PathVariable Long id,
+        @Valid @RequestBody ClassGroupRequest request) {
+
+    service.update(request, id); 
+    return ResponseEntity.noContent().build();
+}
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+}
