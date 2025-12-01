@@ -1,32 +1,22 @@
 package com.fatec.horario.mappers;
 
-import org.springframework.stereotype.Component;
-
 import com.fatec.horario.dtos.TechAxisRequest;
 import com.fatec.horario.dtos.TechAxisResponse;
 import com.fatec.horario.entities.TechAxis;
 
-@Component
 public class TechAxisMapper {
 
-    public TechAxis toEntity(TechAxisRequest request) {
-        if (request == null) {
-            return null;
-        }
-
+    public static TechAxis toEntity(TechAxisRequest request) {
         TechAxis techAxis = new TechAxis();
-        techAxis.setname(request.name());
+        techAxis.setName(request.name());
         return techAxis;
     }
 
-    public TechAxisResponse toResponse(TechAxis entity) {
-        if (entity == null) {
-            return null;
-        }
+    public static TechAxisResponse toResponse(TechAxis entity) {
 
         return new TechAxisResponse(
             entity.getId(),
-            entity.getname()
+            entity.getName()
         );
     }
 }

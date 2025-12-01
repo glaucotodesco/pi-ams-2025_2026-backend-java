@@ -6,19 +6,18 @@ import com.fatec.horario.entities.Schedule;
 
 public class ScheduleMapper {
 
-public static Schedule toEntity(ScheduleRequest request) {
-    Schedule schedule = new Schedule();
-    schedule.setLessonNuumber(request.lessonNumber());
-    schedule.setWeekday(request.weekday());
-    return schedule;
+    public static Schedule toEntity(ScheduleRequest request) {
+        Schedule schedule = new Schedule();
+        schedule.setLessonNumber(request.lessonNumber());
+        schedule.setWeekday(request.weekday());
+        return schedule;
     }
 
-    public static ScheduleResponse toDTO(Schedule schedule) {
+    public static ScheduleResponse toResponse(Schedule schedule) {
         return new ScheduleResponse(
             schedule.getId(),
             schedule.getLessonNumber(),
             schedule.getWeekday()
         );
     }
-
 }

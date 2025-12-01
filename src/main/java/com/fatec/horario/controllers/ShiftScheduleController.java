@@ -33,14 +33,14 @@ public class ShiftScheduleController {
     // GET - Get all shift schedules
     @GetMapping
     public ResponseEntity<List<ShiftScheduleResponse>> getAllShiftSchedules() {
-        List<ShiftScheduleResponse> list = service.getAllShiftSchedules();
+        List<ShiftScheduleResponse> list = service.getAll();
         return ResponseEntity.ok(list);
     }
 
     // GET - Get shift schedule by ID
     @GetMapping("/{id}")
     public ResponseEntity<ShiftScheduleResponse> getShiftScheduleById(@PathVariable Long id) {
-        ShiftScheduleResponse response = service.getShiftScheduleById(id);
+        ShiftScheduleResponse response = service.getById(id);
         return ResponseEntity.ok(response);
     }
 
@@ -49,7 +49,7 @@ public class ShiftScheduleController {
     public ResponseEntity<ShiftScheduleResponse> createShiftSchedule(
             @Valid @RequestBody ShiftScheduleRequest request) {
 
-        ShiftScheduleResponse response = service.createShiftSchedule(request);
+        ShiftScheduleResponse response = service.create(request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -66,14 +66,14 @@ public class ShiftScheduleController {
             @PathVariable Long id,
             @Valid @RequestBody ShiftScheduleRequest request) {
 
-        ShiftScheduleResponse response = service.updateShiftSchedule(id, request);
+        ShiftScheduleResponse response = service.update(id, request);
         return ResponseEntity.ok(response);
     }
 
     // DELETE - Delete shift schedule by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteShiftSchedule(@PathVariable Long id) {
-        service.deleteShiftSchedule(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

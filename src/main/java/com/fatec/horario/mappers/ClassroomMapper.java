@@ -5,28 +5,32 @@ import com.fatec.horario.dtos.ClassroomResponse;
 import com.fatec.horario.entities.Classroom;
 
 public class ClassroomMapper {
-    
-    public static Classroom toEntity(ClassroomRequest request){
-        Classroom Classroom = new Classroom();
 
-        Classroom.setName(request.name());
-        Classroom.setPhysicalResources(request.physicalResources());
-        Classroom.setSoftwareResources(request.softwareResources());
-        Classroom.setCapacity(request.capacity());
+    public static Classroom toEntity(ClassroomRequest request) {
+        Classroom classroom = new Classroom();
 
-        return Classroom;
+        classroom.setName(request.name());
+        classroom.setLocation(request.location());
+        classroom.setPhysicalResources(request.physicalResources());
+        classroom.setSoftwareResources(request.softwareResources());
+        classroom.setCapacity(request.capacity());
+        classroom.setTemplate(request.template());
+        classroom.setPractical(request.practical());
+
+        return classroom;
     }
 
-    public static ClassroomResponse toResponse(Classroom Classroom) {
-       return new ClassroomResponse(
-
-       Classroom.getId(),
-       Classroom.getName(),
-       Classroom.getPhysicalResources(),
-       Classroom.getSoftwareResources(),
-       Classroom.getCapacity()
-
-       );
+    public static ClassroomResponse toResponse(Classroom classroom) {
+        return new ClassroomResponse(
+            classroom.getId(),
+            classroom.getName(),
+            classroom.getLocation(),
+            classroom.getPhysicalResources(),
+            classroom.getSoftwareResources(),
+            classroom.getCapacity(),
+            classroom.getTemplate(),
+            classroom.getPractical()
+        );
 
     }
 
