@@ -30,23 +30,20 @@ public class ShiftScheduleController {
     @Autowired
     private ShiftScheduleService service;
 
-    // GET - Get all shift schedules
     @GetMapping
-    public ResponseEntity<List<ShiftScheduleResponse>> getAllShiftSchedules() {
+    public ResponseEntity<List<ShiftScheduleResponse>> getAll() {
         List<ShiftScheduleResponse> list = service.getAll();
         return ResponseEntity.ok(list);
     }
 
-    // GET - Get shift schedule by ID
     @GetMapping("/{id}")
-    public ResponseEntity<ShiftScheduleResponse> getShiftScheduleById(@PathVariable Long id) {
+    public ResponseEntity<ShiftScheduleResponse> getById(@PathVariable Long id) {
         ShiftScheduleResponse response = service.getById(id);
         return ResponseEntity.ok(response);
     }
 
-    // POST - Create new shift schedule
     @PostMapping
-    public ResponseEntity<ShiftScheduleResponse> createShiftSchedule(
+    public ResponseEntity<ShiftScheduleResponse> create(
             @Valid @RequestBody ShiftScheduleRequest request) {
 
         ShiftScheduleResponse response = service.create(request);
@@ -60,9 +57,8 @@ public class ShiftScheduleController {
         return ResponseEntity.created(location).body(response);
     }
 
-    // PUT - Update shift schedule by ID
     @PutMapping("/{id}")
-    public ResponseEntity<ShiftScheduleResponse> updateShiftSchedule(
+    public ResponseEntity<ShiftScheduleResponse> update(
             @PathVariable Long id,
             @Valid @RequestBody ShiftScheduleRequest request) {
 
@@ -70,9 +66,8 @@ public class ShiftScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    // DELETE - Delete shift schedule by ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteShiftSchedule(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
