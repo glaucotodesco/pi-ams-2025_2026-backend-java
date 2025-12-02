@@ -1,8 +1,8 @@
 package com.fatec.horario.controllers;
+
 import com.fatec.horario.dtos.ClassGroupRequest;
 import com.fatec.horario.dtos.ClassGroupResponse;
 import com.fatec.horario.services.ClassGroupService;
-
 
 import jakarta.validation.Valid;
 
@@ -35,10 +35,10 @@ public class ClassGroupController {
     }
 
     @PostMapping
-    public ResponseEntity<ClassGroupResponse> saveClassGroup(
+    public ResponseEntity<ClassGroupResponse> create(
             @Valid @RequestBody ClassGroupRequest request) {
 
-        ClassGroupResponse classGroup = service.saveClassGroup(request);
+        ClassGroupResponse classGroup = service.create(request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -50,14 +50,12 @@ public class ClassGroupController {
     }
 
     @PutMapping("/{id}")
-public ResponseEntity<Void> updateClassGroup(
-        @PathVariable Long id,
-        @Valid @RequestBody ClassGroupRequest request) {
+    public ResponseEntity<ClassGroupResponse> update(@PathVariable Long id,
+            @Valid @RequestBody ClassGroupRequest request) {
 
-    service.update(request, id); 
-    return ResponseEntity.noContent().build();
-}
-
+        ClassGroupResponse classGroup = service.update(request, id);
+        return ResponseEntity.ok(classGroup);
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
