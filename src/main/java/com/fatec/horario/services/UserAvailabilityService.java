@@ -14,11 +14,7 @@ import com.fatec.horario.repositories.UserAvailabilityRepository;
 @Service
 public class UserAvailabilityService {
 
-    private final UserAvailabilityRepository repository;
-
-    public UserAvailabilityService(UserAvailabilityRepository repository) {
-        this.repository = repository;
-    }
+    private UserAvailabilityRepository repository;
 
     public List<UserAvailabilityResponse> getAll() {
         return repository.findAll()
