@@ -18,11 +18,7 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class ClassGroupController {
 
-    private final ClassGroupService service;
-
-    public ClassGroupController(ClassGroupService service) {
-        this.service = service;
-    }
+    private ClassGroupService service;
 
     @GetMapping
     public ResponseEntity<List<ClassGroupResponse>> getAll() {
