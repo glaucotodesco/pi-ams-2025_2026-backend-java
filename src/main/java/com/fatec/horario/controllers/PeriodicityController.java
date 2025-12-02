@@ -1,17 +1,26 @@
 package com.fatec.horario.controllers;
 
+import java.net.URI;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import com.fatec.horario.dtos.PeriodicityRequest;
 import com.fatec.horario.dtos.PeriodicityResponse;
 import com.fatec.horario.services.PeriodicityService;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
 
 @RestController
 @RequestMapping("/periodicities")
@@ -22,19 +31,19 @@ public class PeriodicityController {
     private PeriodicityService service;
 
     @GetMapping
-    public ResponseEntity<List<PeriodicityResponse>> getAllPeriodicities() {
+    public ResponseEntity<List<PeriodicityResponse>> getAll() {
         List<PeriodicityResponse> periodicities = service.getAll();
         return ResponseEntity.ok(periodicities);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PeriodicityResponse> getPeriodicityById(@PathVariable Long id) {
+    public ResponseEntity<PeriodicityResponse> getById(@PathVariable Long id) {
         PeriodicityResponse periodicity = service.getById(id);
         return ResponseEntity.ok(periodicity);
     }
 
     @PostMapping
-    public ResponseEntity<PeriodicityResponse> createPeriodicity(
+    public ResponseEntity<PeriodicityResponse> create(
             @Valid @RequestBody PeriodicityRequest request) {
 
         PeriodicityResponse created = service.create(request);
@@ -49,7 +58,7 @@ public class PeriodicityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PeriodicityResponse> updatePeriodicity(
+    public ResponseEntity<PeriodicityResponse> update(
             @PathVariable Long id,
             @Valid @RequestBody PeriodicityRequest request) {
 
@@ -58,7 +67,7 @@ public class PeriodicityController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePeriodicity(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
