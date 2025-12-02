@@ -16,53 +16,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.fatec.horario.dtos.ClassGroupRequest;
-import com.fatec.horario.dtos.ClassGroupResponse;
-import com.fatec.horario.services.ClassGroupService;
+import com.fatec.horario.dtos.ScheduleRequest;
+import com.fatec.horario.dtos.ScheduleResponse;
+import com.fatec.horario.services.ScheduleService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/class-groups")
+@RequestMapping("/schedules")
 @CrossOrigin
-public class ClassGroupController {
+public class ScheduleController {
 
     @Autowired
-    private ClassGroupService service;
+    private ScheduleService service;
 
     @GetMapping
-    public ResponseEntity<List<ClassGroupResponse>> getAll() {
-        List<ClassGroupResponse> classGroups = service.getAll();
-        return ResponseEntity.ok(classGroups);
+    public ResponseEntity<List<ScheduleResponse>> getAll() {
+        List<ScheduleResponse> list = service.getAll();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ClassGroupResponse> getById(@PathVariable Long id) {
-        ClassGroupResponse classGroup = service.getById(id);
-        return ResponseEntity.ok(classGroup);
+    public ResponseEntity<ScheduleResponse> getById(@PathVariable Long id) {
+        ScheduleResponse response = service.getById(id);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
-    public ResponseEntity<ClassGroupResponse> create(
-            @Valid @RequestBody ClassGroupRequest request) {
+    public ResponseEntity<ScheduleResponse> create(
+            @Valid @RequestBody ScheduleRequest request) {
 
-        ClassGroupResponse classGroup = service.create(request);
+        ScheduleResponse response = service.create(request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(classGroup.id())
+                .buildAndExpand(response.id())
                 .toUri();
 
-        return ResponseEntity.created(location).body(classGroup);
+        return ResponseEntity.created(location).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClassGroupResponse> update(@PathVariable Long id,
-            @Valid @RequestBody ClassGroupRequest request) {
-
-        ClassGroupResponse classGroup = service.update(request, id);
-        return ResponseEntity.ok(classGroup);
+    public ResponseEntity<ScheduleResponse> update(
+            @PathVariable Long id,
+            @Valid @RequestBody ScheduleRequest request) {
+        ScheduleResponse response = service.update(id, request);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
