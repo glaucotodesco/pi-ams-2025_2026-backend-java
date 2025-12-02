@@ -11,7 +11,10 @@ public record SubjectRequest(
         @Size(max = 20) 
         String acronym,
         @Positive(message = "Pratical Lesson Count must be positive")
-        Integer practicalLessonCount
+        Integer practicalLessonCount,
+        @Positive(message = "Semester Number must be positive")
+        Integer semesterNumber
+
 ) {
 
 }

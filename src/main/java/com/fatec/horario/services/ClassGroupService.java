@@ -15,10 +15,10 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class ClassGroupService {
-     
+
     @Autowired
     private ClassGroupRepository repository;
-   
+
     public List<ClassGroupResponse> getAll() {
         return repository.findAll()
                 .stream()
@@ -40,21 +40,20 @@ public class ClassGroupService {
 
     }
 
-    public ClassGroupResponse saveClassGroup(ClassGroupRequest request) {
+    public ClassGroupResponse create(ClassGroupRequest request) {
         ClassGroup ClassGroup = ClassGroupMapper.toEntity(request);
-        
+
         ClassGroup savedClassGroup = repository.save(ClassGroup);
         return ClassGroupMapper.toResponse(savedClassGroup);
     }
 
-    public void update(ClassGroupRequest request, long id) {
-        ClassGroup ClassGroup = repository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Class group not found"));
-    
-        ClassGroup.setStudentCount(request.studentCount());        
-        repository.save(ClassGroup);
-    }
+    public ClassGroupResponse update(ClassGroupRequest request, long id) {
+        ClassGroup classGroup = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Class group not found"));
 
-   
+        classGroup.setStudentCount(request.studentCount());
+        classGroup = repository.save(classGroup);
+        return ClassGroupMapper.toResponse(classGroup);
+    }
 
 }
