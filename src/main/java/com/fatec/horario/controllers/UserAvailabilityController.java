@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user-availability")
 @CrossOrigin
-public class UserAvaliabilityController {
+public class UserAvailabilityController {
 
     @Autowired
     private UserAvailabilityService service;
