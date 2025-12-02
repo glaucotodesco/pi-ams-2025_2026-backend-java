@@ -3,8 +3,17 @@ package com.fatec.horario.controllers;
 import java.net.URI;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fatec.horario.dtos.ClassGroupRequest;
@@ -18,43 +27,42 @@ import jakarta.validation.Valid;
 @CrossOrigin
 public class ClassGroupController {
 
+    @Autowired
     private ClassGroupService service;
 
     @GetMapping
     public ResponseEntity<List<ClassGroupResponse>> getAll() {
-        List<ClassGroupResponse> groups = service.getAll();
-        return ResponseEntity.ok(groups);
+        List<ClassGroupResponse> classGroups = service.getAll();
+        return ResponseEntity.ok(classGroups);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClassGroupResponse> getById(@PathVariable Long id) {
-        ClassGroupResponse group = service.getById(id);
-        return ResponseEntity.ok(group);
+        ClassGroupResponse classGroup = service.getById(id);
+        return ResponseEntity.ok(classGroup);
     }
 
     @PostMapping
     public ResponseEntity<ClassGroupResponse> create(
             @Valid @RequestBody ClassGroupRequest request) {
 
-        ClassGroupResponse group = service.saveClassGroup(request);
+        ClassGroupResponse classGroup = service.create(request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(group.id())
+                .buildAndExpand(classGroup.id())
                 .toUri();
 
-        return ResponseEntity.created(location).body(group);
+        return ResponseEntity.created(location).body(classGroup);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClassGroupResponse> update(
-            @PathVariable Long id,
+    public ResponseEntity<ClassGroupResponse> update(@PathVariable Long id,
             @Valid @RequestBody ClassGroupRequest request) {
 
-        service.update(request, id);
-        ClassGroupResponse group = service.getById(id);
-        return ResponseEntity.ok(group);
+        ClassGroupResponse classGroup = service.update(request, id);
+        return ResponseEntity.ok(classGroup);
     }
 
     @DeleteMapping("/{id}")
