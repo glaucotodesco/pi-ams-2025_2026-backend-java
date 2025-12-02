@@ -14,16 +14,17 @@ public class SubjectMapper {
         subject.setName(request.name());
         subject.setAcronym(request.acronym());
         subject.setPracticalLessonCount(request.practicalLessonCount());
-        
+        subject.setSemesterNumber(request.semesterNumber());
+
         return subject;
     }
 
     public static SubjectResponse toResponse(Subject subject) {
         return new SubjectResponse(
-            subject.getId(),
-            subject.getName(),
-            subject.getAcronym(),
-            subject.getPracticalLessonCount()
-        );
+                subject.getId(),
+                subject.getName(),
+                subject.getAcronym(),
+                subject.getPracticalLessonCount(),
+                subject.getSemesterNumber());
     }
 }

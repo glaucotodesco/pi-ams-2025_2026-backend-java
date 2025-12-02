@@ -4,6 +4,8 @@ public record SubjectResponse(
     Long id,
     String name,
     String acronym, 
-    Integer practicalLessonCount
+    Integer practicalLessonCount,
+    Integer semesterNumber
+
     ) {
 }
