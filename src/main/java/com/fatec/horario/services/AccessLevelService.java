@@ -15,11 +15,7 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class AccessLevelService {
 
-    private final AccessLevelRepository accessLevelRepository;
-
-    public AccessLevelService(AccessLevelRepository accessLevelRepository) {
-        this.accessLevelRepository = accessLevelRepository;
-    }
+    private AccessLevelRepository accessLevelRepository;
 
     public List<AccessLevelResponse> getAll() {
         return accessLevelRepository.findAll()
