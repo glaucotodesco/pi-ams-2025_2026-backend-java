@@ -15,59 +15,58 @@ public class Subject implements Serializable {
     private String name;
     private String acronym;
     private Integer practicalLessonCount;
-
+    private Integer semesterNumber;
 
     public Subject() {
     }
 
-
-    public Subject(Long id, String name, String acronym, Integer practicalLessonCount) {
+    public Subject(Long id, String name, String acronym, Integer practicalLessonCount, Integer semesterNumber) {
         this.id = id;
         this.name = name;
         this.acronym = acronym;
         this.practicalLessonCount = practicalLessonCount;
+        this.semesterNumber = semesterNumber;
     }
-
 
     public Long getId() {
         return id;
     }
 
-
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getName() {
         return name;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
-
 
     public String getAcronym() {
         return acronym;
     }
 
-
     public void setAcronym(String acronym) {
         this.acronym = acronym;
     }
-
 
     public Integer getPracticalLessonCount() {
         return practicalLessonCount;
     }
 
-
     public void setPracticalLessonCount(Integer practicalLessonCount) {
         this.practicalLessonCount = practicalLessonCount;
     }
 
+    public Integer getSemesterNumber() {
+        return semesterNumber;
+    }
+
+    public void setSemesterNumber(Integer semesterNumber) {
+        this.semesterNumber = semesterNumber;
+    }
 
     @Override
     public int hashCode() {
@@ -76,7 +75,6 @@ public class Subject implements Serializable {
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -95,6 +93,4 @@ public class Subject implements Serializable {
         return true;
     }
 
-    
 }
-
