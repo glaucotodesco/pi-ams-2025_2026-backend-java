@@ -29,7 +29,7 @@ public class ClassroomService {
     public ClassroomResponse getById(long id) {
         return repository.findById(id)
                 .map(ClassroomMapper::toResponse)
-                .orElseThrow(() -> new EntityNotFoundException("Classroom not not found."));
+                .orElseThrow(() -> new EntityNotFoundException("Classroom not found."));
     }
 
     public ClassroomResponse save(ClassroomRequest request) {
@@ -38,7 +38,7 @@ public class ClassroomService {
         return ClassroomMapper.toResponse(classroom);
     }
 
-    public void update(ClassroomRequest request, long id) {
+    public ClassroomResponse update(Long id, ClassroomRequest request) {
         Classroom classroom = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Classroom not found."));
 
@@ -48,14 +48,17 @@ public class ClassroomService {
         classroom.setSoftwareResources(request.softwareResources());
         classroom.setCapacity(request.capacity());
 
-        repository.save(classroom);
+        Classroom updated = repository.save(classroom);
+
+        return ClassroomMapper.toResponse(updated);
     }
 
     public void delete(long id) {
-        if (repository.existsById(id))
+        if (repository.existsById(id)) {
             repository.deleteById(id);
-        else
-            throw new EntityNotFoundException("The classroom not found.");
+        } else {
+            throw new EntityNotFoundException("Classroom not found.");
+        }
     }
 
     public List<ClassroomResponse> getAllTemplates() {
@@ -71,9 +74,4 @@ public class ClassroomService {
                 .map(ClassroomMapper::toResponse)
                 .toList();
     }
-
-
-    
-
-  
 }

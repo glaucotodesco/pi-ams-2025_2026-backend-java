@@ -1,3 +1,5 @@
+package com.fatec.horario.controllers;
+
 import java.net.URI;
 import java.util.List;
 
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fatec.horario.dtos.ClassroomRequest;
 import com.fatec.horario.dtos.ClassroomResponse;
+import com.fatec.horario.services.ClassroomService;
 
 import jakarta.validation.Valid;
 
@@ -40,10 +43,10 @@ public class ClassroomController {
     }
 
     @PostMapping
-    public ResponseEntity<ClassroomResponse> create(
+    public ResponseEntity<ClassroomResponse> save(
             @Valid @RequestBody ClassroomRequest request) {
 
-        ClassroomResponse group = service.create(request);
+        ClassroomResponse group = service.save(request);
 
         URI location = ServletUriComponentsBuilder
             .fromCurrentRequest()
