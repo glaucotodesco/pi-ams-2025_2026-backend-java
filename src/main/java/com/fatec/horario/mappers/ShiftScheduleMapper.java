@@ -1,14 +1,15 @@
 package com.fatec.horario.mappers;
 
-import com.fatec.horario.entities.ShiftSchedule;
+import org.springframework.stereotype.Component;
+
 import com.fatec.horario.dtos.ShiftScheduleRequest;
 import com.fatec.horario.dtos.ShiftScheduleResponse;
-import org.springframework.stereotype.Component;
+import com.fatec.horario.entities.ShiftSchedule;
 
 @Component
 public class ShiftScheduleMapper {
 
-    public ShiftSchedule toEntity(ShiftScheduleRequest request) {
+    public static ShiftSchedule toEntity(ShiftScheduleRequest request) {
         if (request == null) {
             return null;
         }
@@ -22,7 +23,7 @@ public class ShiftScheduleMapper {
         return entity;
     }
 
-    public ShiftScheduleResponse toResponse(ShiftSchedule entity) {
+    public static ShiftScheduleResponse toResponse(ShiftSchedule entity) {
         if (entity == null) {
             return null;
         }

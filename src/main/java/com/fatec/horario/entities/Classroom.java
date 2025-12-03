@@ -14,16 +14,23 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String location;
     private String physicalResources;
     private String softwareResources;
     private Integer capacity;
+    private Boolean template;
+    private Boolean practical;
 
-    public Classroom(Long id, String name, String physicalResources, String softwareResources, Integer capacity) {
+    public Classroom(Long id, String name, String location, String physicalResources, String softwareResources,
+            Integer capacity, Boolean template, Boolean practical) {
         this.id = id;
         this.name = name;
         this.physicalResources = physicalResources;
         this.softwareResources = softwareResources;
         this.capacity = capacity;
+        this.location = location;
+        this.template = template;
+        this.practical = practical;
     }
 
     public Classroom() {
@@ -43,6 +50,14 @@ public class Classroom {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getPhysicalResources() {
@@ -69,6 +84,22 @@ public class Classroom {
         this.capacity = capacity;
     }
 
+    public Boolean getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Boolean template) {
+        this.template = template;
+    }
+
+    public Boolean getPractical() {
+        return practical;
+    }
+
+    public void setPractical(Boolean practical) {
+        this.practical = practical;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -93,5 +124,4 @@ public class Classroom {
             return false;
         return true;
     }
-    
 }
