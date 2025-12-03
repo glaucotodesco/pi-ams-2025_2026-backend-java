@@ -32,29 +32,29 @@ public class ClassroomController {
 
     @GetMapping
     public ResponseEntity<List<ClassroomResponse>> getAll() {
-        List<ClassroomResponse> groups = service.getAll();
-        return ResponseEntity.ok(groups);
+        List<ClassroomResponse> classrooms = service.getAll();
+        return ResponseEntity.ok(classrooms);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClassroomResponse> getById(@PathVariable Long id) {
-        ClassroomResponse group = service.getById(id);
-        return ResponseEntity.ok(group);
+        ClassroomResponse classroom = service.getById(id);
+        return ResponseEntity.ok(classroom);
     }
 
     @PostMapping
     public ResponseEntity<ClassroomResponse> save(
             @Valid @RequestBody ClassroomRequest request) {
 
-        ClassroomResponse group = service.save(request);
+        ClassroomResponse classroom = service.save(request);
 
         URI location = ServletUriComponentsBuilder
             .fromCurrentRequest()
             .path("/{id}")
-            .buildAndExpand(group.id())
+            .buildAndExpand(classroom.id())
             .toUri();
 
-        return ResponseEntity.created(location).body(group);
+        return ResponseEntity.created(location).body(classroom);
     }
 
     @PutMapping("/{id}")
@@ -62,8 +62,8 @@ public class ClassroomController {
             @PathVariable Long id,
             @Valid @RequestBody ClassroomRequest request) {
 
-        ClassroomResponse group = service.update(id, request);
-        return ResponseEntity.ok(group);
+        ClassroomResponse classroom = service.update(id, request);
+        return ResponseEntity.ok(classroom);
     }
 
     @DeleteMapping("/{id}")
