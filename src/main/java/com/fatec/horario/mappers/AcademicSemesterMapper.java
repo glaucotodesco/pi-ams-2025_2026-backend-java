@@ -17,7 +17,8 @@ public class AcademicSemesterMapper {
         return new AcademicSemesterResponse(
             academicSemester.getId(),
             academicSemester.getAcademicYear(),
-            academicSemester.getStatus()
+            academicSemester.getStatus(),
+            academicSemester.getCourse() != null ? CourseMapper.toResponse(academicSemester.getCourse()) : null
         );
     }
 

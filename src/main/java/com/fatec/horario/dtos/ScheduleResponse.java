@@ -4,9 +4,9 @@ public record ScheduleResponse (
     Long id,
     Integer lessonNumber,
     Integer weekday,
-    Long shiftScheduleId,
-    Long classroomId,
-    Long academicSemesterId,
-    Long subjectId,
-    Long professorId
+    ShiftScheduleResponse shiftSchedule,
+    ClassroomResponse classroom,
+    AcademicSemesterResponse academicSemester,
+    SubjectResponse subject,
+    UserResponse professor
 ){}

@@ -4,7 +4,7 @@ public record UserAvailabilityResponse(
     Long id,
     Integer weekday,
     Integer lessonNumber,
-    Long userId
+    UserResponse user
 ) {
 
 }
