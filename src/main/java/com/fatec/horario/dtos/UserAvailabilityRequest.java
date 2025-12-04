@@ -10,9 +10,9 @@ public record UserAvailabilityRequest(
     Integer weekday,
 
     @NotNull
-    @Positive(message = "it has to be positive.")
-    Integer lessonNumber
-
+    @Positive(message = "LessonNumber must be positive.")
+    Integer lessonNumber,
+    Long userId
 ) {
 
 }

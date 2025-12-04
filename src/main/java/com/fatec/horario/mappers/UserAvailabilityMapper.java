@@ -1,7 +1,7 @@
 package com.fatec.horario.mappers;
 
-import com.fatec.horario.dtos.UserAvailabilityResponse;
 import com.fatec.horario.dtos.UserAvailabilityRequest;
+import com.fatec.horario.dtos.UserAvailabilityResponse;
 import com.fatec.horario.entities.UserAvailability;
 
 public class UserAvailabilityMapper {
@@ -23,7 +23,8 @@ public class UserAvailabilityMapper {
 
                 userAvailability.getId(),
                 userAvailability.getWeekday(),
-                userAvailability.getLessonNumber()
+                userAvailability.getLessonNumber(),
+                userAvailability.getUser() != null ? userAvailability.getUser().getId() : null
 
         );
     }

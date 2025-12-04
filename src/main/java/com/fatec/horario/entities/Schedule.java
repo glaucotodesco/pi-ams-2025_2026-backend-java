@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,12 +24,72 @@ public class Schedule implements Serializable{
     @Column(nullable = false, length = 20)
     private Integer weekday;
 
+    @ManyToOne
+    @JoinColumn(name = "shift_schedule_id")
+    private ShiftSchedule shiftSchedule;
+
+    @ManyToOne
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;
+
+    @ManyToOne
+    @JoinColumn(name = "academic_semester_id")
+    private AcademicSemester academicSemester;
+
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private User professor;
+
     public Schedule() {}
 
     public Schedule(Long id, Integer lessonNumber, Integer weekday) {
         this.id = id;
         this.lessonNumber = lessonNumber;
         this.weekday = weekday;
+    }
+
+    public ShiftSchedule getShiftSchedule() {
+        return shiftSchedule;
+    }
+
+    public void setShiftSchedule(ShiftSchedule shiftSchedule) {
+        this.shiftSchedule = shiftSchedule;
+    }
+
+    public Classroom getClassroom() {
+        return classroom;
+    }
+
+    public void setClassroom(Classroom classroom) {
+        this.classroom = classroom;
+    }
+
+    public AcademicSemester getAcademicSemester() {
+        return academicSemester;
+    }
+
+    public void setAcademicSemester(AcademicSemester academicSemester) {
+        this.academicSemester = academicSemester;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public User getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(User professor) {
+        this.professor = professor;
     }
 
     public Long getId() {

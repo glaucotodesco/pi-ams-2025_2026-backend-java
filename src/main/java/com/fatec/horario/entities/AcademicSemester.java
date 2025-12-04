@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -24,6 +26,10 @@ public class AcademicSemester implements Serializable {
 
     @Column(nullable = false, length = 20)
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     public AcademicSemester() {}
 
@@ -55,6 +61,14 @@ public class AcademicSemester implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     @Override

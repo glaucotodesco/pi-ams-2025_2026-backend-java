@@ -11,5 +11,10 @@ public record ScheduleRequest(
 
     @NotNull(message = "Weekday is required")
     @Positive(message = "Weekday must be positive")
-    Integer weekday
+    Integer weekday,
+    Long shiftScheduleId,
+    Long classroomId,
+    Long academicSemesterId,
+    Long subjectId,
+    Long professorId
 ) {}

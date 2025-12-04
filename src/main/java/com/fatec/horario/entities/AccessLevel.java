@@ -1,9 +1,12 @@
 package com.fatec.horario.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,6 +19,9 @@ public class AccessLevel {
     private Long id;
     private Integer level;
     private String description;
+
+    @OneToMany(mappedBy = "accessLevel")
+    private List<User> users;
 
     public AccessLevel(Long id, Integer level, String description) {
         this.id = id;
@@ -48,6 +54,14 @@ public class AccessLevel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override
