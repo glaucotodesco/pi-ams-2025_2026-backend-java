@@ -1,7 +1,16 @@
 package com.fatec.horario.entities;
 
-import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "subject")
@@ -16,6 +25,9 @@ public class Subject implements Serializable {
     private String acronym;
     private Integer practicalLessonCount;
     private Integer semesterNumber;
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Course> courses = new HashSet<>();
 
     public Subject() {
     }
@@ -68,6 +80,14 @@ public class Subject implements Serializable {
         this.semesterNumber = semesterNumber;
     }
 
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -92,5 +112,4 @@ public class Subject implements Serializable {
             return false;
         return true;
     }
-
 }

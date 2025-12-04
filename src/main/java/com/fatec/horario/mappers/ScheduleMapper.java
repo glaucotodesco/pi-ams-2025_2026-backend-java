@@ -17,7 +17,12 @@ public class ScheduleMapper {
         return new ScheduleResponse(
             schedule.getId(),
             schedule.getLessonNumber(),
-            schedule.getWeekday()
+            schedule.getWeekday(),
+            schedule.getShiftSchedule() != null ? schedule.getShiftSchedule().getId() : null,
+            schedule.getClassroom() != null ? schedule.getClassroom().getId() : null,
+            schedule.getAcademicSemester() != null ? schedule.getAcademicSemester().getId() : null,
+            schedule.getSubject() != null ? schedule.getSubject().getId() : null,
+            schedule.getProfessor() != null ? schedule.getProfessor().getId() : null
         );
     }
 }

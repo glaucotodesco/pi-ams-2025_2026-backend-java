@@ -1,9 +1,16 @@
 package com.fatec.horario.entities;
 
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +21,13 @@ public class Course {
     private Long id;
     private String name;
     private String description;
+
+    @ManyToMany
+    @JoinTable(name = "course_subject", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private Set<Subject> subjects;
+
+    @OneToMany(mappedBy = "course")
+    private List<AcademicSemester> academicSemesters;
 
     public Course() {
     }
@@ -42,6 +56,22 @@ public class Course {
         this.description = description;
     }
 
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<AcademicSemester> getAcademicSemesters() {
+        return academicSemesters;
+    }
+
+    public void setAcademicSemesters(List<AcademicSemester> academicSemesters) {
+        this.academicSemesters = academicSemesters;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -66,7 +96,4 @@ public class Course {
             return false;
         return true;
     }
-
-    
-
 }

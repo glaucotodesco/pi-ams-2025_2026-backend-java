@@ -1,15 +1,17 @@
 package com.fatec.horario.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.fatec.horario.dtos.SubjectRequest;
 import com.fatec.horario.dtos.SubjectResponse;
 import com.fatec.horario.entities.Subject;
 import com.fatec.horario.mappers.SubjectMapper;
 import com.fatec.horario.repositories.SubjectRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class SubjectService {
@@ -26,7 +28,7 @@ public class SubjectService {
 
     public SubjectResponse getById(Long id) {
         Subject subject = subjectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Subject not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Subject not found with id: " + id));
 
         return SubjectMapper.toResponse(subject);
     }
@@ -39,7 +41,7 @@ public class SubjectService {
 
     public SubjectResponse update(Long id, SubjectRequest request) {
         Subject subject = subjectRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Subject not found with id: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Subject not found with id: " + id));
 
         subject.setName(request.name());
         subject.setAcronym(request.acronym());
@@ -51,7 +53,7 @@ public class SubjectService {
 
     public void delete(Long id) {
         if (!subjectRepository.existsById(id)) {
-            throw new RuntimeException("Subject not found with id: " + id);
+            throw new EntityNotFoundException("Subject not found with id: " + id);
         }
 
         subjectRepository.deleteById(id);

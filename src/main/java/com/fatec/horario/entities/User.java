@@ -1,12 +1,16 @@
 package com.fatec.horario.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,6 +29,13 @@ public class User implements Serializable{
 
     
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserAvailability> availabilities;
+
+    @ManyToOne
+    @JoinColumn(name = "access_level_id")
+    private AccessLevel accessLevel;
 
     public User() {
     }
@@ -66,6 +77,22 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<UserAvailability> getAvailabilities() {
+        return availabilities;
+    }
+
+    public void setAvailabilities(List<UserAvailability> availabilities) {
+        this.availabilities = availabilities;
+    }
+
+    public AccessLevel getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(AccessLevel accessLevel) {
+        this.accessLevel = accessLevel;
     }
 
     @Override
