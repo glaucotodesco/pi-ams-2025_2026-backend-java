@@ -3,10 +3,12 @@ package com.fatec.horario.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fatec.horario.dtos.UserAvailabilityRequest;
 import com.fatec.horario.dtos.UserAvailabilityResponse;
+import com.fatec.horario.entities.User;
 import com.fatec.horario.entities.UserAvailability;
 import com.fatec.horario.mappers.UserAvailabilityMapper;
 import com.fatec.horario.repositories.UserAvailabilityRepository;
@@ -17,9 +19,9 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public class UserAvailabilityService {
 
-    @org.springframework.beans.factory.annotation.Autowired
+    @Autowired
     private UserAvailabilityRepository repository;
-    @org.springframework.beans.factory.annotation.Autowired
+    @Autowired
     private UserRepository userRepository;
 
     public List<UserAvailabilityResponse> getAll() {
@@ -36,41 +38,40 @@ public class UserAvailabilityService {
         return UserAvailabilityMapper.toResponse(userAvailability);
     }
 
-    public UserAvailabilityResponse create(UserAvailabilityRequest dto) {
-        UserAvailability entity = UserAvailabilityMapper.toEntity(dto);
-        if (dto.userId() != null) {
-            var u = userRepository.findById(dto.userId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.userId()));
-            entity.setUser(u);
+    public UserAvailabilityResponse create(UserAvailabilityRequest request) {
+        UserAvailability userAvailability = UserAvailabilityMapper.toEntity(request);
+        if (request.userId() != null) {
+            User user = userRepository.findById(request.userId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + request.userId()));
+            userAvailability.setUser(user);
         }
-        UserAvailability saved = repository.save(entity);
+         userAvailability = repository.save(userAvailability);
 
-        return UserAvailabilityMapper.toResponse(saved);
+        return UserAvailabilityMapper.toResponse(userAvailability);
     }
 
-    public UserAvailabilityResponse update(Long id, UserAvailabilityRequest dto) {
-        UserAvailability existing = repository.findById(id)
+    public UserAvailabilityResponse update(Long id, UserAvailabilityRequest request) {
+        UserAvailability userAvailability = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UserAvailability not found with id " + id));
 
-        existing.setWeekday(dto.weekday());
-        existing.setLessonNumber(dto.lessonNumber());
-        if (dto.userId() != null) {
-            var u = userRepository.findById(dto.userId())
-                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + dto.userId()));
-            existing.setUser(u);
+        userAvailability.setWeekday(request.weekday());
+        userAvailability.setLessonNumber(request.lessonNumber());
+        if (request.userId() != null) {
+            User user = userRepository.findById(request.userId())
+                    .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + request.userId()));
+            userAvailability.setUser(user);
         } else {
-            existing.setUser(null);
+            userAvailability.setUser(null);
         }
 
-        UserAvailability updated = repository.save(existing);
+        userAvailability = repository.save(userAvailability);
 
-        return UserAvailabilityMapper.toResponse(updated);
+        return UserAvailabilityMapper.toResponse(userAvailability);
     }
 
     public void delete(Long id) {
-        UserAvailability existing = repository.findById(id)
+        UserAvailability userAvailability = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("UserAvailability not found with id " + id));
-
-        repository.delete(existing);
+        repository.delete(userAvailability);
     }
 }

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.fatec.horario.dtos.UserRequest;
 import com.fatec.horario.dtos.UserResponse;
+import com.fatec.horario.entities.AccessLevel;
 import com.fatec.horario.entities.User;
 import com.fatec.horario.mappers.UserMapper;
+import com.fatec.horario.repositories.AccessLevelRepository;
 import com.fatec.horario.repositories.UserRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -18,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AccessLevelRepository accessLevelRepository;
 
     public List<UserResponse> getAll() {
         return userRepository.findAll()
@@ -34,6 +39,13 @@ public class UserService {
 
     public UserResponse create(UserRequest request) {
         User user = UserMapper.toEntity(request);
+        if (request.accessLevelId() != null) {
+            AccessLevel accessLevel = accessLevelRepository.findById(request.accessLevelId())
+                    .orElseThrow(() -> new EntityNotFoundException(
+                            "Acess Level not found with id: " + request.accessLevelId()));
+            user.setAccessLevel(accessLevel);
+        }
+
         user = userRepository.save(user);
         return UserMapper.toResponse(user);
     }
@@ -44,6 +56,16 @@ public class UserService {
         user.setName(request.name());
         user.setEmail(request.email());
         user.setPassword(request.password());
+
+        if (request.accessLevelId() != null) {
+            AccessLevel accessLevel = accessLevelRepository.findById(request.accessLevelId())
+                    .orElseThrow(() -> new EntityNotFoundException(
+                            "Acess Level not found with id: " + request.accessLevelId()));
+            user.setAccessLevel(accessLevel);
+        } else {
+            user.setAccessLevel(null);
+        }
+
         user = userRepository.save(user);
         return UserMapper.toResponse(user);
     }

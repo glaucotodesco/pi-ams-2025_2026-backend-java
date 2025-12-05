@@ -14,5 +14,6 @@ public record UserRequest(
     @Size(max = 120)
     String email,
     
-    String password
+    String password,
+    Long accessLevelId
 ) {}

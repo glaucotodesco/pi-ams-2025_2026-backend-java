@@ -1,32 +1,30 @@
 package com.fatec.horario.entities;
 
-
-import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "periodicity")
-public class Periodicity {
+@Table(name = "user_subject")
+public class UserSubject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String description;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @OneToMany(mappedBy = "periodicity")
-    private List<Course> courses;
+    @ManyToOne
+    @JoinColumn(name = "subject_id", nullable = false)
+    private Subject subject;
 
-    
-    public Periodicity() {
+    public UserSubject() {
+    }
+
+    public UserSubject(User user, Subject subject) {
+        this.user = user;
+        this.subject = subject;
     }
 
     public Long getId() {
@@ -37,20 +35,20 @@ public class Periodicity {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+    public User getUser() {
+        return user;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
-    public List<Course> getCourses() {
-        return courses;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 
     @Override
@@ -69,7 +67,7 @@ public class Periodicity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Periodicity other = (Periodicity) obj;
+        UserSubject other = (UserSubject) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -77,5 +75,4 @@ public class Periodicity {
             return false;
         return true;
     }
-    
 }

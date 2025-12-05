@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.fatec.horario.dtos.AcademicSemesterRequest;
 import com.fatec.horario.dtos.AcademicSemesterResponse;
 import com.fatec.horario.entities.AcademicSemester;
+import com.fatec.horario.entities.Course;
 import com.fatec.horario.mappers.AcademicSemesterMapper;
 import com.fatec.horario.repositories.AcademicSemesterRepository;
+import com.fatec.horario.repositories.CourseRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -17,39 +19,52 @@ import jakarta.persistence.EntityNotFoundException;
 public class AcademicSemesterService {
 
     @Autowired
-    private AcademicSemesterRepository repository;
+    private AcademicSemesterRepository academicSemesterRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     public List<AcademicSemesterResponse> getAll() {
-        return repository.findAll()
+        return academicSemesterRepository.findAll()
                 .stream()
                 .map(AcademicSemesterMapper::toResponse)
                 .toList();
     }
 
     public AcademicSemesterResponse getById(long id) {
-        return repository.findById(id).map(AcademicSemesterMapper::toResponse)
+        return academicSemesterRepository.findById(id).map(AcademicSemesterMapper::toResponse)
                 .orElseThrow(() -> new EntityNotFoundException("Academic Semester not found."));
     }
 
     public AcademicSemesterResponse create(AcademicSemesterRequest request) {
         AcademicSemester academicSemester = AcademicSemesterMapper.toEntity(request);
-        AcademicSemester savedAcademicSemester = repository.save(academicSemester);
-        return AcademicSemesterMapper.toResponse(savedAcademicSemester);
+        academicSemester = academicSemesterRepository.save(academicSemester);
+        if (request.courseId() != null) {
+            Course course = courseRepository.findById(request.courseId())
+                    .orElseThrow(() -> new EntityNotFoundException("Course not found with id: " + request.courseId()));
+            academicSemester.setCourse(course);
+        }
+
+        return AcademicSemesterMapper.toResponse(academicSemester);
     }
 
     public AcademicSemesterResponse update(AcademicSemesterRequest request, long id) {
-        AcademicSemester aux = repository.getReferenceById(id);
-        aux.setAcademicYear(request.academicYear());
-        aux.setStatus(request.status());
+        AcademicSemester academicSemester = academicSemesterRepository.getReferenceById(id);
+        academicSemester.setAcademicYear(request.academicYear());
+        academicSemester.setStatus(request.status());
+        if (request.courseId() != null) {
+            Course course = courseRepository.findById(request.courseId())
+                    .orElseThrow(() -> new EntityNotFoundException("Course not found with id: " + request.courseId()));
+            academicSemester.setCourse(course);
+        }
+        academicSemesterRepository.save(academicSemester);
 
-        repository.save(aux);
-
-        return AcademicSemesterMapper.toResponse(aux);
+        return AcademicSemesterMapper.toResponse(academicSemester);
     }
 
     public void deleteAcademicSemesterById(long id) {
-        if (repository.existsById(id))
-            repository.deleteById(id);
+        if (academicSemesterRepository.existsById(id))
+            academicSemesterRepository.deleteById(id);
         else
             throw new EntityNotFoundException("The academic semester does not exist.");
 

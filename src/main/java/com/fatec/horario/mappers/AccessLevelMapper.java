@@ -18,7 +18,7 @@ public class AccessLevelMapper {
         return AccessLevel;
     }
 
-    public static AccessLevelResponse toDTO(AccessLevel AccessLevel) {
+    public static AccessLevelResponse toResponse(AccessLevel AccessLevel) {
         return new AccessLevelResponse(
 
             AccessLevel.getId(),

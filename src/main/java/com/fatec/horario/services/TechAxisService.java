@@ -20,10 +20,10 @@ public class TechAxisService {
     private TechAxisRepository repository;
 
     public TechAxisResponse getById(Long id) {
-        TechAxis entity = repository.findById(id)
+        TechAxis techAxis = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("TechAxis not found with id: " + id));
 
-        return TechAxisMapper.toResponse(entity);
+        return TechAxisMapper.toResponse(techAxis);
     }
 
     public List<TechAxisResponse> getAll() {
@@ -32,21 +32,20 @@ public class TechAxisService {
                 .toList();
     }
 
-    public TechAxisResponse create(TechAxisRequest dto) {
-        TechAxis entity = TechAxisMapper.toEntity(dto);
-        TechAxis saved = repository.save(entity);
-        return TechAxisMapper.toResponse(saved);
+    public TechAxisResponse create(TechAxisRequest request) {
+        TechAxis techAxis = TechAxisMapper.toEntity(request);
+        techAxis = repository.save(techAxis);
+        return TechAxisMapper.toResponse(techAxis);
     }
 
-    public TechAxisResponse update(Long id, TechAxisRequest dto) {
-        TechAxis entity = repository.findById(id)
+    public TechAxisResponse update(Long id, TechAxisRequest request) {
+        TechAxis techAxis = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("TechAxis not found with id: " + id));
 
-        entity.setName(dto.name());
+        techAxis.setName(request.name());
+        techAxis = repository.save(techAxis);
 
-        TechAxis updated = repository.save(entity);
-
-        return TechAxisMapper.toResponse(updated);
+        return TechAxisMapper.toResponse(techAxis);
     }
 
     public void delete(Long id) {

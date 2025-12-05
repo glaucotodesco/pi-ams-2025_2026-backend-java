@@ -42,9 +42,8 @@ public class ModalityService {
 
     public ModalityResponse create(ModalityRequest request) {
         Modality modality = ModalityMapper.toEntity(request);
-        
-        Modality savedModality = repository.save(modality);
-        return ModalityMapper.toResponse(savedModality);
+        modality = repository.save(modality);
+        return ModalityMapper.toResponse(modality);
     }
 
     public ModalityResponse update(ModalityRequest request, long id) {
@@ -55,8 +54,6 @@ public class ModalityService {
     
         modality = repository.save(modality);
         return  ModalityMapper.toResponse(modality);
-    }
-
-    
+    }   
 
 }

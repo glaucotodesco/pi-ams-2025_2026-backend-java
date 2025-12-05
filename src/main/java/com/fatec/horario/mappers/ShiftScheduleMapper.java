@@ -1,18 +1,12 @@
 package com.fatec.horario.mappers;
 
-import org.springframework.stereotype.Component;
-
 import com.fatec.horario.dtos.ShiftScheduleRequest;
 import com.fatec.horario.dtos.ShiftScheduleResponse;
 import com.fatec.horario.entities.ShiftSchedule;
 
-@Component
 public class ShiftScheduleMapper {
 
     public static ShiftSchedule toEntity(ShiftScheduleRequest request) {
-        if (request == null) {
-            return null;
-        }
 
         ShiftSchedule entity = new ShiftSchedule();
         entity.setShiftDescription(request.shiftDescription());
@@ -24,16 +18,13 @@ public class ShiftScheduleMapper {
     }
 
     public static ShiftScheduleResponse toResponse(ShiftSchedule entity) {
-        if (entity == null) {
-            return null;
-        }
-
         ShiftScheduleResponse response = new ShiftScheduleResponse(
                 entity.getId(),
                 entity.getShiftDescription(),
                 entity.getStartTime(),
                 entity.getLessonCount(),
-                entity.getLessonDuration());
+                entity.getLessonDuration(),
+                entity.getIncludedSaturday());
 
         return response;
     }

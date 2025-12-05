@@ -26,7 +26,7 @@ public class UserMapper {
             user.getName(),
             user.getEmail(),
             user.getPassword(),
-            user.getAccessLevel() != null ? AccessLevelMapper.toDTO(user.getAccessLevel()) : null
+            user.getAccessLevel() != null ? AccessLevelMapper.toResponse(user.getAccessLevel()) : null
         );
     }
 }
