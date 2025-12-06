@@ -1,11 +1,14 @@
 package com.fatec.horario.repositories;
 
-import com.fatec.horario.entities.CourseSubject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.fatec.horario.entities.UserSubject;
+
 @Repository
-public interface CourseSubjectRepository extends JpaRepository<CourseSubject, Long> {
+public interface UserSubjectRepository extends JpaRepository<UserSubject, Long> {
+
+    void deleteByUserId(Long userId);
 
     void deleteBySubjectId(Long subjectId);
 }

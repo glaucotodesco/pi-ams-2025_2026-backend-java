@@ -11,9 +11,14 @@ import com.fatec.horario.entities.AccessLevel;
 import com.fatec.horario.entities.User;
 import com.fatec.horario.mappers.UserMapper;
 import com.fatec.horario.repositories.AccessLevelRepository;
+import com.fatec.horario.repositories.CourseUserRepository;
+import com.fatec.horario.repositories.ScheduleRepository;
+import com.fatec.horario.repositories.UserAvailabilityRepository;
 import com.fatec.horario.repositories.UserRepository;
+import com.fatec.horario.repositories.UserSubjectRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserService {
@@ -23,6 +28,17 @@ public class UserService {
 
     @Autowired
     private AccessLevelRepository accessLevelRepository;
+
+    @Autowired
+    private CourseUserRepository courseUserRepository;
+
+    @Autowired
+    private UserSubjectRepository userSubjectRepository;
+    @Autowired
+    private UserAvailabilityRepository userAvailabilityRepository;
+
+    @Autowired
+    private ScheduleRepository scheduleRepository;
 
     public List<UserResponse> getAll() {
         return userRepository.findAll()
@@ -70,10 +86,15 @@ public class UserService {
         return UserMapper.toResponse(user);
     }
 
+    @Transactional
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
             throw new EntityNotFoundException("User not found with id: " + id);
         }
+        userSubjectRepository.deleteByUserId(id);
+        courseUserRepository.deleteByUserId(id);
+        userAvailabilityRepository.deleteByUserId(id);
+        scheduleRepository.deleteByProfessorId(id);
         userRepository.deleteById(id);
     }
 }
