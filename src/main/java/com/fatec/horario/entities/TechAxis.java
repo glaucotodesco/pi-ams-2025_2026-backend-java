@@ -1,12 +1,14 @@
 package com.fatec.horario.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,11 +22,10 @@ public class TechAxis implements Serializable {
     @Column(nullable = false, length = 100)
     private String name;
 
-    public TechAxis() {}
+    @OneToMany(mappedBy = "techAxis")
+    private List<Subject> subjects;
 
-    public TechAxis(Long id, String name) {
-        this.id = id;
-        this.name = name;
+    public TechAxis() {
     }
 
     public Long getId() {
@@ -43,18 +44,37 @@ public class TechAxis implements Serializable {
         this.name = name;
     }
 
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
     @Override
     public int hashCode() {
-        return (id == null) ? 0 : id.hashCode();
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null || getClass() != obj.getClass())
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
             return false;
         TechAxis other = (TechAxis) obj;
-        return id != null && id.equals(other.id);
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
+
 }

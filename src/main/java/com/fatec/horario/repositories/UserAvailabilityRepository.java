@@ -7,4 +7,6 @@ import com.fatec.horario.entities.UserAvailability;
 
 @Repository
 public interface UserAvailabilityRepository extends JpaRepository<UserAvailability, Long> {
+
+    void deleteByUserId(Long id);
 }

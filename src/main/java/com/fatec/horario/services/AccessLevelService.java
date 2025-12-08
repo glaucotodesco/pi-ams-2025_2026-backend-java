@@ -22,7 +22,7 @@ public class AccessLevelService {
     public List<AccessLevelResponse> getAll() {
         return repository.findAll()
                 .stream()
-                .map(AccessLevelMapper::toDTO)
+                .map(AccessLevelMapper::toResponse)
                 .toList();
     }
 
@@ -30,33 +30,33 @@ public class AccessLevelService {
         AccessLevel accessLevel = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AccessLevel not found with id " + id));
 
-        return AccessLevelMapper.toDTO(accessLevel);
+        return AccessLevelMapper.toResponse(accessLevel);
     }
 
     public AccessLevelResponse create(AccessLevelRequest request) {
-        AccessLevel newAccessLevel = AccessLevelMapper.toEntity(request);
-        AccessLevel saved = repository.save(newAccessLevel);
+        AccessLevel accessLevel = AccessLevelMapper.toEntity(request);
+        accessLevel = repository.save(accessLevel);
 
-        return AccessLevelMapper.toDTO(saved);
+        return AccessLevelMapper.toResponse(accessLevel);
     }
 
     public AccessLevelResponse update(Long id, AccessLevelRequest request) {
-        AccessLevel existing = repository.findById(id)
+        AccessLevel accessLevel = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AccessLevel not found with id " + id));
 
-        existing.setLevel(request.level());
-        existing.setDescription(request.description());
+        accessLevel.setLevel(request.level());
+        accessLevel.setDescription(request.description());
 
-        AccessLevel updated = repository.save(existing);
+        accessLevel = repository.save(accessLevel);
 
-        return AccessLevelMapper.toDTO(updated);
+        return AccessLevelMapper.toResponse(accessLevel);
     }
 
     public void delete(Long id) {
-        AccessLevel existing = repository.findById(id)
+        AccessLevel accessLevel = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AccessLevel not found with id " + id));
 
-        repository.delete(existing);
+        repository.delete(accessLevel);
     }
 
 }

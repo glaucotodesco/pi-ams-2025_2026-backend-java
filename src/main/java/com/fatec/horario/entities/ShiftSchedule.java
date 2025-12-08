@@ -1,11 +1,7 @@
 package com.fatec.horario.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "shift_schedule")
@@ -27,7 +23,10 @@ public class ShiftSchedule {
     @Column(nullable = false)
     private Integer lessonDuration;
 
-    
+    private Boolean includedSaturday;
+
+    @OneToMany(mappedBy = "shiftSchedule")
+    private List<ShiftScheduleDetail> details;
 
     public ShiftSchedule() {
     }
@@ -72,6 +71,22 @@ public class ShiftSchedule {
         this.lessonDuration = lessonDuration;
     }
 
+    public List<ShiftScheduleDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<ShiftScheduleDetail> details) {
+        this.details = details;
+    }
+
+    public Boolean getIncludedSaturday() {
+        return includedSaturday;
+    }
+
+    public void setIncludedSaturday(Boolean includedSaturday) {
+        this.includedSaturday = includedSaturday;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -96,5 +111,5 @@ public class ShiftSchedule {
             return false;
         return true;
     }
-    
+
 }

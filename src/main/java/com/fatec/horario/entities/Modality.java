@@ -2,6 +2,7 @@ package com.fatec.horario.entities;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "modality")
@@ -13,6 +14,12 @@ public class Modality implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String name;
+
+    @OneToMany(mappedBy = "modality")
+    private List<Course> courses;
+
+    @OneToMany(mappedBy = "modality")
+    private List<Subject> subjects;
   
 
     public Modality() {
@@ -44,6 +51,21 @@ public class Modality implements Serializable {
         this.name = name;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
 
     @Override
     public int hashCode() {

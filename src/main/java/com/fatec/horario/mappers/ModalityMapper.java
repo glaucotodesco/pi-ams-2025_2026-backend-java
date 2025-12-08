@@ -16,9 +16,6 @@ public class ModalityMapper {
     }
 
     public static ModalityResponse toResponse(Modality Modality) {
-        if (Modality == null) {
-            return null;
-        }
         return new ModalityResponse(
             Modality.getId(),
             Modality.getName()

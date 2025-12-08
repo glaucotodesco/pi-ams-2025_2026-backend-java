@@ -20,6 +20,8 @@ public record ShiftScheduleRequest(
 
         @NotNull(message = "Lesson duration is required") 
         @Positive(message = "Lesson duration must be positive") 
-        Integer lessonDuration
+        Integer lessonDuration,
+        Boolean includedSaturday
+
     ) {
 }

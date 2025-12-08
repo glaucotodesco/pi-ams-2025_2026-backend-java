@@ -5,7 +5,8 @@ public record ShiftScheduleResponse(
         String shiftDescription,
         Integer startTime,
         Integer lessonCount,
-        Integer lessonDuration
+        Integer lessonDuration,
+        Boolean includedSaturday
 ) {
 
 }

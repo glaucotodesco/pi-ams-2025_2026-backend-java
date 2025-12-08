@@ -17,7 +17,9 @@ public class CourseMapper {
        return new CourseResponse(
         course.getId(),
         course.getName(),
-        course.getDescription()
+        course.getDescription(),
+        course.getModality() != null ? ModalityMapper.toResponse(course.getModality()) : null,
+        course.getPeriodicity() != null ? PeriodicityMapper.toResponse(course.getPeriodicity()) : null
        );
     }
 

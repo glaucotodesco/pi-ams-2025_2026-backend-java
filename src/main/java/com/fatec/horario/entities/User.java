@@ -14,7 +14,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "user")
+@Table(name = "tbl_user")
 public class User implements Serializable{
 
     @Id
@@ -33,10 +33,20 @@ public class User implements Serializable{
     @OneToMany(mappedBy = "user")
     private List<UserAvailability> availabilities;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserSubject> userSubjects;
+
+    @OneToMany(mappedBy = "user")
+    private List<CourseUser> courseUsers;
+
+    @OneToMany(mappedBy = "professor")
+    private List<Schedule> schedules;
+
     @ManyToOne
     @JoinColumn(name = "access_level_id")
     private AccessLevel accessLevel;
 
+ 
     public User() {
     }
 
@@ -85,6 +95,30 @@ public class User implements Serializable{
 
     public void setAvailabilities(List<UserAvailability> availabilities) {
         this.availabilities = availabilities;
+    }
+
+    public List<UserSubject> getUserSubjects() {
+        return userSubjects;
+    }
+
+    public void setUserSubjects(List<UserSubject> userSubjects) {
+        this.userSubjects = userSubjects;
+    }
+
+    public List<CourseUser> getCourseUsers() {
+        return courseUsers;
+    }
+
+    public void setCourseUsers(List<CourseUser> courseUsers) {
+        this.courseUsers = courseUsers;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     public AccessLevel getAccessLevel() {

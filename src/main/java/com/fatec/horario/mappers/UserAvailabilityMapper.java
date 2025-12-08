@@ -24,7 +24,7 @@ public class UserAvailabilityMapper {
                 userAvailability.getId(),
                 userAvailability.getWeekday(),
                 userAvailability.getLessonNumber(),
-                userAvailability.getUser() != null ? userAvailability.getUser().getId() : null
+                userAvailability.getUser() != null ? UserMapper.toResponse(userAvailability.getUser()) : null
 
         );
     }

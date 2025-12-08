@@ -8,9 +8,12 @@ public record CourseRequest(
         @Size(min = 2, max = 255, message = "the name must be between 2 and 255 characters long") 
         String name,
 
-        @NotBlank(message = "monality is required") 
+        @NotBlank(message = "description is required") 
         @Size(min = 2, max = 255, message = "the description must be between 2 and 255 characters long") 
-        String description
+        String description,
+        
+        Long modalityId,
+        Long periodicityId
 
 ) {
 

@@ -13,8 +13,6 @@ public class SubjectMapper {
         Subject subject = new Subject();
         subject.setName(request.name());
         subject.setAcronym(request.acronym());
-        subject.setPracticalLessonCount(request.practicalLessonCount());
-        subject.setSemesterNumber(request.semesterNumber());
 
         return subject;
     }
@@ -24,7 +22,8 @@ public class SubjectMapper {
                 subject.getId(),
                 subject.getName(),
                 subject.getAcronym(),
-                subject.getPracticalLessonCount(),
-                subject.getSemesterNumber());
+                subject.getTechAxis() != null ? TechAxisMapper.toResponse(subject.getTechAxis()) : null,
+                subject.getModality() != null ? ModalityMapper.toResponse(subject.getModality()) : null
+            );
     }
 }

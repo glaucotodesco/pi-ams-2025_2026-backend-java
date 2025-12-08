@@ -4,4 +4,5 @@ public record ModalityResponse(
     Long id,
     String name
     ) {
+    
 }

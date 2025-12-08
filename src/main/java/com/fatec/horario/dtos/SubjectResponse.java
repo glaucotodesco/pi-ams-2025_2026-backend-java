@@ -4,8 +4,8 @@ public record SubjectResponse(
     Long id,
     String name,
     String acronym, 
-    Integer practicalLessonCount,
-    Integer semesterNumber
+    TechAxisResponse techAxis,
+    ModalityResponse modality
 
     ) {
 }

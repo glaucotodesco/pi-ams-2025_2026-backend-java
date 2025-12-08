@@ -47,10 +47,12 @@ public class ClassroomService {
         classroom.setPhysicalResources(request.physicalResources());
         classroom.setSoftwareResources(request.softwareResources());
         classroom.setCapacity(request.capacity());
+        classroom.setTemplate(request.template());
+        classroom.setPractical(request.practical());
 
-        Classroom updated = repository.save(classroom);
+        classroom = repository.save(classroom);
 
-        return ClassroomMapper.toResponse(updated);
+        return ClassroomMapper.toResponse(classroom);
     }
 
     public void delete(long id) {

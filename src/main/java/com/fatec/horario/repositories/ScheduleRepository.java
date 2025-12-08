@@ -7,5 +7,10 @@ import com.fatec.horario.entities.Schedule;
 
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long>{
+
+    void deleteByProfessorId(Long id);
+
+    void deleteBySubjectId(Long id);
+
     
 }

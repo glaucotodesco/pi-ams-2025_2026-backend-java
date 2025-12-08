@@ -1,6 +1,5 @@
 package com.fatec.horario.entities;
 
-
 import java.io.Serializable;
 
 import jakarta.persistence.Column;
@@ -11,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
 
 @Entity
 @Table(name = "academic_semester")
@@ -31,7 +29,8 @@ public class AcademicSemester implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    public AcademicSemester() {}
+    public AcademicSemester() {
+    }
 
     public AcademicSemester(Long id, Integer academicYear, String status) {
         this.id = id;

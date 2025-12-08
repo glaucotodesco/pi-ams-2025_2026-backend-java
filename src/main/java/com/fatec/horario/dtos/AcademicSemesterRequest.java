@@ -15,5 +15,6 @@ public record AcademicSemesterRequest (
 
     @NotBlank(message = "Status is required")
     @Size(min = 3, max = 64, message = "Status must be between 3 and 64 characters")
-    String status
+    String status,
+    Long courseId
 ) {}

@@ -35,9 +35,9 @@ public class ShiftScheduleService {
     }
 
     public ShiftScheduleResponse create(ShiftScheduleRequest request) {
-        ShiftSchedule entity = ShiftScheduleMapper.toEntity(request);
-        ShiftSchedule saved = repository.save(entity);
-        return ShiftScheduleMapper.toResponse(saved);
+        ShiftSchedule shiftSchedule = ShiftScheduleMapper.toEntity(request);
+        shiftSchedule = repository.save(shiftSchedule);
+        return ShiftScheduleMapper.toResponse(shiftSchedule);
     }
 
     public ShiftScheduleResponse update(Long id, ShiftScheduleRequest request) {
@@ -48,6 +48,7 @@ public class ShiftScheduleService {
         shiftSchedule.setLessonDuration(request.lessonDuration());
         shiftSchedule.setShiftDescription(request.shiftDescription());
         shiftSchedule.setStartTime(request.startTime());
+        shiftSchedule.setIncludedSaturday(request.includedSaturday());
         shiftSchedule = repository.save(shiftSchedule);
         return ShiftScheduleMapper.toResponse(shiftSchedule);
     }

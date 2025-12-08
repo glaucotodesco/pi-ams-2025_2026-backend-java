@@ -18,11 +18,11 @@ public class ScheduleMapper {
             schedule.getId(),
             schedule.getLessonNumber(),
             schedule.getWeekday(),
-            schedule.getShiftSchedule() != null ? schedule.getShiftSchedule().getId() : null,
-            schedule.getClassroom() != null ? schedule.getClassroom().getId() : null,
-            schedule.getAcademicSemester() != null ? schedule.getAcademicSemester().getId() : null,
-            schedule.getSubject() != null ? schedule.getSubject().getId() : null,
-            schedule.getProfessor() != null ? schedule.getProfessor().getId() : null
+            schedule.getShiftSchedule() != null ? ShiftScheduleMapper.toResponse(schedule.getShiftSchedule()) : null,
+            schedule.getClassroom() != null ? ClassroomMapper.toResponse(schedule.getClassroom()) : null,
+            schedule.getAcademicSemester() != null ? AcademicSemesterMapper.toResponse(schedule.getAcademicSemester()) : null,
+            schedule.getSubject() != null ? SubjectMapper.toResponse(schedule.getSubject()) : null,
+            schedule.getProfessor() != null ? UserMapper.toResponse(schedule.getProfessor()) : null
         );
     }
 }
